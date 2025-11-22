@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
 
               {/* Get Your Photos Button */}
               <a 
-                href="https://drive.google.com/drive/folders/1k2-D9UhjyH_ZMxFWmseMr8il6cfyAqmi?usp=sharing" // Placeholder link - please update with actual URL
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfsVDvUWXkHBvjS2ay4V9HEQDjhJyGW5RRg-r8xV6mNDMO4Gw/viewform?usp=dialog" // Placeholder link - please update with actual URL
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 bg-[#4285F4] hover:bg-[#3367d6] text-white font-semibold py-2 px-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 w-[210px]"
