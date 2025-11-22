@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
             <Link to="/" className="cursor-pointer flex-shrink-0 md:-ml-1">
               <img src="https://iili.io/KpSYT3F.png" alt="Bharatescapes Logo" className="h-16 w-auto" />
             </Link>
-            <p className="text-theme-text-dark/80">Offbeat experiences, breathtaking landscapes, and soulful escapes in Udaipur.</p>
+            <p className="text-theme-text-dark/80">Unique experiences, breathtaking landscapes, and soulful escapes in Udaipur.</p>
           </div>
           <div>
             <h3 className="text-lg font-bold mb-4">Quick Links</h3>
