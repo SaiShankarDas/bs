@@ -87,7 +87,7 @@ const HomePage: React.FC = () => {
                 transition={{ duration: 0.8, ease: 'easeOut' }}
                 className="text-center max-w-3xl mx-auto"
             >
-                <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-primary-start transition-all duration-500 hover:text-warm-gold-dark hover:drop-shadow-[0_0_15px_rgba(181,98,5,0.3)]">Your Offbeat Escape Awaits</h2>
+                <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-primary-start transition-all duration-500 hover:text-warm-gold-dark hover:drop-shadow-[0_0_15px_rgba(181,98,5,0.3)]">Your Dream Escape Awaits</h2>
                 <p className="text-lg text-gray-700">Bharatescapes is more than a tour—it's a story. We curate every moment to connect you with the soul of Udaipur, from its majestic palaces to its hidden gems.</p>
             </motion.div>
 

@@ -42,7 +42,7 @@ const Hero: React.FC = () => {
             transition={{ duration: 1, ease: 'easeOut', delay: 0.8 }}
             className="font-poppins text-lg md:text-2xl max-w-3xl mx-auto mb-12"
           >
-            Offbeat experiences, breathtaking landscapes, and soulful escapes.
+            Unique experiences, breathtaking landscapes, and soulful escapes.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}

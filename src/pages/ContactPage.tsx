@@ -183,7 +183,7 @@ const ContactPage: React.FC = () => {
                 <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-6 text-accent-gold transition-all duration-500 hover:drop-shadow-[0_0_15px_rgba(255,199,0,0.3)]">Find Us in Udaipur</h2>
                 <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-xl border-4 border-white/20">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116033.55729938061!2d73.6501450431327!3d24.59602493976856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3967e56550a14411%3A0xdbd8c28455b868b0!2sUdaipur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1678886543210!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3628.1912525284847!2d73.680838!3d24.582594999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjTCsDM0JzU3LjMiTiA3M8KwNDAnNTEuMCJF!5e0!3m2!1sen!2sin!4v1763837737848!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
