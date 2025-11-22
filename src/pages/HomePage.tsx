@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PageTransition from '../components/PageTransition';
 import Hero from '../components/Hero';
 import { motion } from 'framer-motion';
@@ -59,6 +59,22 @@ const whyChooseData = [
 ];
 
 const HomePage: React.FC = () => {
+  // Optimize segments for mobile to reduce DOM nodes and improve performance
+  const [segments, setSegments] = useState(35);
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Use fewer segments on mobile devices to prevent lag
+      setSegments(window.innerWidth < 768 ? 20 : 35);
+    };
+    
+    // Initial check
+    handleResize();
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <PageTransition>
       <Hero />
@@ -92,7 +108,7 @@ const HomePage: React.FC = () => {
                         className="group relative flex flex-col"
                     >
                         <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg shadow-xl">
-                            <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                            <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                         </div>
                         <div className="bg-black/20 backdrop-blur-lg border border-white/20 shadow-xl rounded-lg p-6 -mt-16 z-10 mx-4 flex-grow">
@@ -174,6 +190,7 @@ const HomePage: React.FC = () => {
                 overlayBlurColor="#FFF8E7"
                 imageBorderRadius="12px"
                 openedImageBorderRadius="20px"
+                segments={segments} // Pass dynamic segments based on screen size
             />
         </motion.div>
       </section>

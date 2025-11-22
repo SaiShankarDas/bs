@@ -10,6 +10,9 @@ body {
   min-height: 100vh;
   background-color: #000000; /* Changed from #0A192F to Black to prevent blue flash */
   overflow-x: hidden; /* Prevent horizontal scroll */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on iOS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* New class for the fixed background to replace body bg-fixed */
@@ -21,11 +24,21 @@ body {
   background-repeat: no-repeat;
   /* This element stays fixed without forcing body repaints */
   transform: translateZ(0); /* Trigger GPU acceleration */
+  will-change: transform; /* Hint to browser for optimization */
+}
+
+/* iOS Input Zoom Fix: Prevents zooming when focusing inputs on mobile */
+@media screen and (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
 }
 
 /* For smooth scrolling on anchor links if needed */
 html {
   scroll-behavior: smooth;
+  /* Improve scroll performance on iOS */
+  -webkit-overflow-scrolling: touch; 
 }
 
 .video-overlay::after {
@@ -51,6 +64,7 @@ html {
 /* For DomeGallery scroll lock */
 .dg-scroll-lock {
   overflow: hidden;
+  touch-action: none; /* Prevent scrolling on iOS when locked */
 }
 
 /* Film Strip Gallery */
@@ -79,7 +93,6 @@ html {
   .doodle-bg-overlay {
     @apply relative z-0;
   }
-  /* Doodle pattern removed */
 }
 
 /* Utility for performance */
@@ -89,6 +102,7 @@ html {
   }
   .gpu-accelerated {
     transform: translateZ(0);
+    backface-visibility: hidden;
   }
 }
 
