@@ -44,7 +44,9 @@ const TourRegistrationPage: React.FC = () => {
 
   // Form state
   const [tourType, setTourType] = useState('');
-  const [tourDate, setTourDate] = useState<Date | null>(null);
+  const [tourDate, setTourDate] = useState<Date | null>(null); // Used for single tour OR Sunrise date
+  const [tourDate2, setTourDate2] = useState<Date | null>(null); // Used for Sunset date when "Both" is selected
+  
   const [fullName, setFullName] = useState('');
   const [mobileNumber, setMobileNumber] = useState<string | undefined>();
   const [email, setEmail] = useState('');
@@ -83,9 +85,10 @@ const TourRegistrationPage: React.FC = () => {
   }, [submissionStatus]);
 
   const isRider = riderType === 'Riding a scooter';
+  const isBothTours = tourType === 'Both (Sunrise & Sunset)';
 
   const resetForm = () => {
-    setTourType(''); setTourDate(null); setFullName(''); setMobileNumber(undefined);
+    setTourType(''); setTourDate(null); setTourDate2(null); setFullName(''); setMobileNumber(undefined);
     setEmail(''); setCityCountry(''); setEmergencyName(''); setEmergencyNumber(undefined);
     setHasLicense(''); setRiderType(''); setLicensePhoto(null); setMedicalInfo('');
     setAllergies(''); setBloodGroup(''); setIsTermsAgreed(false);
@@ -106,6 +109,13 @@ const TourRegistrationPage: React.FC = () => {
       setFeedbackMessage('The form is not configured. Please contact support.');
       setSubmissionStatus('error');
       return;
+    }
+
+    // Validate dates for "Both" option manually if needed, though 'required' prop on DatePicker handles it mostly
+    if (isBothTours && (!tourDate || !tourDate2)) {
+        setFeedbackMessage('Please select dates for both Sunrise and Sunset tours.');
+        setSubmissionStatus('error');
+        return;
     }
 
     setSubmissionStatus('submitting');
@@ -140,10 +150,20 @@ const TourRegistrationPage: React.FC = () => {
         fileName = fileToUpload.name;
       }
 
+      // Format date string based on selection
+      let formattedDate = '';
+      if (isBothTours) {
+        const d1 = tourDate ? tourDate.toLocaleDateString('en-CA') : 'N/A';
+        const d2 = tourDate2 ? tourDate2.toLocaleDateString('en-CA') : 'N/A';
+        formattedDate = `Sunrise: ${d1} | Sunset: ${d2}`;
+      } else {
+        formattedDate = tourDate ? tourDate.toLocaleDateString('en-CA') : '';
+      }
+
       const submissionData = {
         formType: 'tour-registration',
         tourType,
-        tourDate: tourDate ? tourDate.toLocaleDateString('en-CA') : '',
+        tourDate: formattedDate,
         fullName,
         mobileNumber: mobileNumber || '',
         email,
@@ -195,7 +215,6 @@ const TourRegistrationPage: React.FC = () => {
             transition={{ duration: 0.7 }}
             className="text-center mb-12"
           >
-            {/* Updated heading color to text-primary-start and hover to text-warm-gold-dark */}
             <h1 className="text-4xl md:text-5xl font-playfair font-bold text-primary-start transition-all duration-500 hover:text-warm-gold-dark hover:drop-shadow-[0_0_15px_rgba(181,98,5,0.3)]">Tour Registration</h1>
             <p className="text-lg text-warm-text/70 max-w-2xl mx-auto mt-3">Please review the terms and complete the form to book your adventure.</p>
           </motion.div>
@@ -206,7 +225,6 @@ const TourRegistrationPage: React.FC = () => {
             <div className="space-y-4">
               {terms.slice(0, 4).map((term, i) => (
                 <div key={i} className="flex items-start gap-4">
-                  {/* Updated icon color to text-warm-gold-dark */}
                   <term.icon className="h-6 w-6 text-warm-gold-dark flex-shrink-0 mt-1" />
                   <p className="text-warm-text/80">{term.text}</p>
                 </div>
@@ -224,7 +242,6 @@ const TourRegistrationPage: React.FC = () => {
                   <div className="space-y-4">
                     {terms.slice(4).map((term, i) => (
                       <div key={i} className="flex items-start gap-4">
-                        {/* Updated icon color to text-warm-gold-dark */}
                         <term.icon className="h-6 w-6 text-warm-gold-dark flex-shrink-0 mt-1" />
                         <p className="text-warm-text/80">{term.text}</p>
                       </div>
@@ -254,20 +271,54 @@ const TourRegistrationPage: React.FC = () => {
                     <option value="" disabled>Select a tour</option>
                     <option value="Sunrise Tour">Sunrise Tour</option>
                     <option value="Sunset Tour">Sunset Tour</option>
+                    <option value="Both (Sunrise & Sunset)">Both (Sunrise & Sunset)</option>
                   </select>
                 </div>
-                <div>
-                  <label className={labelClasses}>Tour Date*</label>
-                  <DatePicker 
-                    required 
-                    selected={tourDate} 
-                    onChange={(date: Date) => setTourDate(date)} 
-                    minDate={new Date()} 
-                    placeholderText="Select a date" 
-                    className={inputClasses}
-                    dateFormat="dd/MM/yyyy"
-                  />
-                </div>
+
+                {isBothTours ? (
+                  <>
+                    <div>
+                      <label className={labelClasses}>Sunrise Tour Date*</label>
+                      <DatePicker 
+                        required 
+                        selected={tourDate} 
+                        onChange={(date: Date) => setTourDate(date)} 
+                        minDate={new Date()} 
+                        placeholderText="Select Sunrise Date" 
+                        className={inputClasses}
+                        dateFormat="dd/MM/yyyy"
+                      />
+                    </div>
+                    <div>
+                      <label className={labelClasses}>Sunset Tour Date*</label>
+                      <DatePicker 
+                        required 
+                        selected={tourDate2} 
+                        onChange={(date: Date) => setTourDate2(date)} 
+                        minDate={new Date()} 
+                        placeholderText="Select Sunset Date" 
+                        className={inputClasses}
+                        dateFormat="dd/MM/yyyy"
+                      />
+                    </div>
+                    {/* Empty div to maintain grid layout if needed, or let it flow */}
+                    <div className="hidden md:block"></div> 
+                  </>
+                ) : (
+                  <div>
+                    <label className={labelClasses}>Tour Date*</label>
+                    <DatePicker 
+                      required 
+                      selected={tourDate} 
+                      onChange={(date: Date) => setTourDate(date)} 
+                      minDate={new Date()} 
+                      placeholderText="Select a date" 
+                      className={inputClasses}
+                      dateFormat="dd/MM/yyyy"
+                    />
+                  </div>
+                )}
+
                 <div className="md:col-span-2">
                   <label className={labelClasses}>Full Name*</label>
                   <input type="text" required value={fullName} onChange={e => setFullName(e.target.value)} className={inputClasses} />
