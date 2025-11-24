@@ -12,7 +12,7 @@ const Hero: React.FC = () => {
     <section 
       id="hero" 
       className="relative h-screen w-full overflow-hidden video-overlay bg-cover bg-center bg-no-repeat z-0"
-      style={{ backgroundImage: "url('https://iili.io/KZ3h9Vf.jpg')" }}
+      style={{ backgroundImage: "url('images/herocover.jpg')" }}
     >
           <video
         autoPlay
@@ -20,7 +20,7 @@ const Hero: React.FC = () => {
         muted
         playsInline
         className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-        poster="https://iili.io/KZ3h9Vf.jpg"
+        poster="images/herocover.jpg"
       >
         <source src="/videos/herobg3.mp4" type="video/mp4" />
         Your browser does not support the video tag.

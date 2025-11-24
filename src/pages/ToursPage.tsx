@@ -21,19 +21,19 @@ const ToursPage: React.FC = () => {
         <div className="container mx-auto px-6 space-y-16">
             {/* Morning Tour */}
             <section>
-                <h2 className="text-4xl md:text-5xl font-playfair font-bold text-center mb-4 text-dark-bg transition-all duration-500 hover:text-warm-wine hover:drop-shadow-[0_0_15px_rgba(178,58,72,0.4)]">🌅 Morning Adventure Tour</h2>
+                <h2 className="text-4xl md:text-5xl font-playfair font-bold text-center mb-4 text-dark-bg transition-all duration-500 hover:text-warm-wine hover:drop-shadow-[0_0_15px_rgba(178,58,72,0.4)]">Morning Adventure Tour</h2>
                 <TourRoadmap tours={toursData.morning} />
             </section>
 
             {/* Evening Tour */}
             <section>
-                <h2 className="text-4xl md:text-5xl font-playfair font-bold text-center mb-4 text-dark-bg transition-all duration-500 hover:text-warm-wine hover:drop-shadow-[0_0_15px_rgba(178,58,72,0.4)]">🌇 Evening Heritage & Sunset Tour</h2>
+                <h2 className="text-4xl md:text-5xl font-playfair font-bold text-center mb-4 text-dark-bg transition-all duration-500 hover:text-warm-wine hover:drop-shadow-[0_0_15px_rgba(178,58,72,0.4)]">Evening Heritage & Sunset Tour</h2>
                 <TourRoadmap tours={toursData.evening} />
             </section>
 
             {/* Day Itinerary */}
             <section>
-                <h2 className="text-4xl md:text-5xl font-playfair font-bold text-center mb-4 text-dark-bg transition-all duration-500 hover:text-warm-wine hover:drop-shadow-[0_0_15px_rgba(178,58,72,0.4)]">🕌 Day Itinerary — Explore Udaipur Like a Local</h2>
+                <h2 className="text-4xl md:text-5xl font-playfair font-bold text-center mb-4 text-dark-bg transition-all duration-500 hover:text-warm-wine hover:drop-shadow-[0_0_15px_rgba(178,58,72,0.4)]">Day Itinerary — Explore Udaipur Like a Local</h2>
                 <TourRoadmap tours={toursData.day} />
             </section>
         </div>

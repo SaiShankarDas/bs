@@ -44,7 +44,7 @@ const GalleryPage: React.FC = () => {
         {/* Morning Tour Gallery */}
         <GallerySection 
           id="morning-gallery"
-          title="🌅 Morning Adventure Tour"
+          title="Morning Adventure Tour"
           subtitle="Sunrise hues, hidden waterfalls, and the serene curves of Rayta Hills."
           images={morningImages}
           initialCount={10}
@@ -53,7 +53,7 @@ const GalleryPage: React.FC = () => {
         {/* Evening Tour Gallery */}
         <GallerySection 
           id="evening-gallery"
-          title="🌇 Evening Heritage & Sunset Tour"
+          title="Evening Heritage & Sunset Tour"
           subtitle="Golden hour glows, ancient temples, and the vibrant skyline of the Old City."
           images={eveningImages}
           initialCount={10}
