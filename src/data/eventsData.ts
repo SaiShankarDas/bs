@@ -50,4 +50,10 @@ export const eventsData = [
     image: 'https://iili.io/f28D7jt.jpg?q=80&w=800&auto=format&fit=crop',
     icon: Tv,
   },
+  {
+  title: 'Rapping & Busking',
+  description: 'Freestyle, rap, sing, and bring the streets alive with raw performances.',
+  image: '',
+  icon: Music,
+},
 ];
