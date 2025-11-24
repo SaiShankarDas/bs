@@ -24,7 +24,7 @@ const StaysPage: React.FC = () => {
             >
               <div className="aspect-[4/3] p-8 flex items-center justify-center bg-gradient-to-br from-white to-gray-50">
                 <img 
-                  src="https://iili.io/f3YQpHl.png" 
+                  src="/images/whereabout.png" 
                   alt="Whereabout Hostel Logo" 
                   className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
                 />
