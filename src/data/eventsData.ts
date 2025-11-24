@@ -53,7 +53,7 @@ export const eventsData = [
   {
     title: 'Rapping & Busking',
     description: 'Freestyle, rap, sing, and bring the streets alive with raw performances.',
-    image: '/images/Events/Rapping & busking.jpg',
+    image: '/images/Events/Rapping & busking.png',
     icon: Music,
   },
 ];
