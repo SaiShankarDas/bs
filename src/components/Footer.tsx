@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
         <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
           <div className="flex flex-col items-center md:items-start gap-4">
             <Link to="/" className="cursor-pointer flex-shrink-0 md:-ml-1">
-              <img src="https://iili.io/KpSYT3F.png" alt="Bharatescapes Logo" className="h-16 w-auto" />
+              <img src="/images/Logo.png" alt="Bharatescapes Logo" className="h-16 w-auto" />
             </Link>
             <p className="text-theme-text-dark/80">Unique experiences, breathtaking landscapes, and soulful escapes in Udaipur.</p>
           </div>

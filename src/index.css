@@ -18,7 +18,7 @@ body {
 /* New class for the fixed background to replace body bg-fixed */
 .fixed-bg-layer {
   @apply fixed inset-0 -z-50;
-  background-image: url('https://iili.io/f2vgILB.png');
+  background-image: url('/images/bg.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
