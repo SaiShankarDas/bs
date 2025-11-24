@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Mail, Phone, Camera } from 'lucide-react';
+import { Instagram, Mail, Phone, Camera,Youtube } from 'lucide-react';
 import WhatsAppIcon from './common/WhatsAppIcon';
 
 const Footer: React.FC = () => {
@@ -33,6 +33,14 @@ const Footer: React.FC = () => {
               <a href="https://www.instagram.com/bharatescapes/" target="_blank" rel="noopener noreferrer" className="text-theme-text-dark/80 hover:text-theme-accent-orange-end transition-all duration-300 hover:scale-110" aria-label="Visit our Instagram">
                 <Instagram className="h-6 w-6" />
               </a>
+           <a
+  href="https://youtube.com/@bharatescapes?si=N3M9XrOnPKUqEcag"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Visit our YouTube"
+>
+  <Youtube className="h-7 w-7 text-theme-text-dark/80 hover:text-theme-accent-orange-end transition-all duration-300 hover:scale-110" />
+</a>
               <a href="https://wa.me/917976789334?text=Hi%20Bharatescapes%2C%0AI'd%20like%20to%20book%20a%20tour%20with%20Bharatescapes.%0ACan%20you%20share%20the%20best%20options%3F" target="_blank" rel="noopener noreferrer" className="text-theme-text-dark/80 hover:text-theme-accent-orange-end transition-all duration-300 hover:scale-110" aria-label="Chat on WhatsApp">
                 <WhatsAppIcon className="h-6 w-6" />
               </a>
