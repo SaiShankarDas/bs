@@ -19,6 +19,7 @@ const FloatingWhatsApp: React.FC = () => {
       aria-label="Chat on WhatsApp"
     >
       <WhatsAppIcon className="w-full h-full" />
+      <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-75 animate-ping -z-10"></span>
     </motion.a>
   );
 };
