@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PageTransition from '../components/PageTransition';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Bike, MapPin, Clock, BadgeCheck, ShieldAlert, HardHat, CloudSun, CircleDollarSign,
+  Bike, Car, MapPin, Clock, BadgeCheck, ShieldAlert, HardHat, CloudSun, CircleDollarSign,
   Briefcase, UserCheck, Camera, HeartPulse, LoaderCircle, CheckCircle, AlertTriangle, FileText, Upload
 } from 'lucide-react';
 import DatePicker from 'react-datepicker';
@@ -12,6 +12,7 @@ import 'react-phone-number-input/style.css';
 
 const terms = [
   { icon: Bike, text: 'Scooters are rental vehicles – All scooters used during the tour are taken on hire. Bharatescapes is NOT responsible for mechanical issues/failures caused due to the rental provider.' },
+  { icon: Car, text: 'Damage to Vehicle – Any damage to the vehicle interior/exterior caused by guests must be compensated based on the rental company’s assessment.' },
   { icon: MapPin, text: 'Pickup & Drop Location – Guests must report & return ONLY from the fixed meeting point: Sanskrit College Parking Area, Udaipur.' },
   { icon: Clock, text: 'Reporting Time – Guests must arrive 10–15 mins before the scheduled departure. Late arrivals may miss the tour. No refunds for late arrival.' },
   { icon: BadgeCheck, text: 'Valid Driving License Mandatory – Only participants with a valid 2-wheeler driver’s license can ride a scooter. No exceptions.' },
@@ -53,14 +54,19 @@ const TourRegistrationPage: React.FC = () => {
   const [cityCountry, setCityCountry] = useState('');
   const [emergencyName, setEmergencyName] = useState('');
   const [emergencyNumber, setEmergencyNumber] = useState<string | undefined>();
+  
+  // Vehicle & Rider State
+  const [vehicleType, setVehicleType] = useState(''); // 'Scooter' | 'Car'
   const [hasLicense, setHasLicense] = useState('');
   const [riderType, setRiderType] = useState('');
   const [licensePhoto, setLicensePhoto] = useState<File | null>(null);
+  
+  // Health Info
   const [medicalInfo, setMedicalInfo] = useState('');
   const [allergies, setAllergies] = useState('');
   const [bloodGroup, setBloodGroup] = useState('');
 
-  // Pillion ID proof state
+  // ID proof state (For Pillion or Car)
   const [idProofType, setIdProofType] = useState('');
   const [otherIdProofName, setOtherIdProofName] = useState('');
   const [idProofFile, setIdProofFile] = useState<File | null>(null);
@@ -68,10 +74,10 @@ const TourRegistrationPage: React.FC = () => {
   const SCRIPT_URL = import.meta.env.VITE_GOOGLE_APP_SCRIPT_URL;
 
   useEffect(() => {
-    if (hasLicense === 'No') {
+    if (vehicleType === 'Scooter' && hasLicense === 'No') {
       setRiderType('Sitting behind');
     }
-  }, [hasLicense]);
+  }, [hasLicense, vehicleType]);
 
   // Auto-dismiss success message after 10 seconds
   useEffect(() => {
@@ -84,14 +90,14 @@ const TourRegistrationPage: React.FC = () => {
     }
   }, [submissionStatus]);
 
-  const isRider = riderType === 'Riding a scooter';
+  const isRider = vehicleType === 'Scooter' && riderType === 'Riding a scooter';
   const isBothTours = tourType === 'Both (Sunrise & Sunset)';
 
   const resetForm = () => {
     setTourType(''); setTourDate(null); setTourDate2(null); setFullName(''); setMobileNumber(undefined);
     setEmail(''); setCityCountry(''); setEmergencyName(''); setEmergencyNumber(undefined);
-    setHasLicense(''); setRiderType(''); setLicensePhoto(null); setMedicalInfo('');
-    setAllergies(''); setBloodGroup(''); setIsTermsAgreed(false);
+    setVehicleType(''); setHasLicense(''); setRiderType(''); setLicensePhoto(null); 
+    setMedicalInfo(''); setAllergies(''); setBloodGroup(''); setIsTermsAgreed(false);
     setIdProofType(''); setOtherIdProofName(''); setIdProofFile(null);
   };
 
@@ -111,9 +117,15 @@ const TourRegistrationPage: React.FC = () => {
       return;
     }
 
-    // Validate dates for "Both" option manually if needed, though 'required' prop on DatePicker handles it mostly
+    // Validate dates for "Both" option
     if (isBothTours && (!tourDate || !tourDate2)) {
         setFeedbackMessage('Please select dates for both Sunrise and Sunset tours.');
+        setSubmissionStatus('error');
+        return;
+    }
+
+    if (!vehicleType) {
+        setFeedbackMessage('Please select a vehicle type.');
         setSubmissionStatus('error');
         return;
     }
@@ -124,16 +136,25 @@ const TourRegistrationPage: React.FC = () => {
       let fileToUpload: File | null = null;
       let finalIdProofType: string = '';
 
-      if (isRider) {
-        fileToUpload = licensePhoto;
-        finalIdProofType = 'Driving License';
-      } else if (riderType === 'Sitting behind') {
+      if (vehicleType === 'Scooter') {
+        if (isRider) {
+          fileToUpload = licensePhoto;
+          finalIdProofType = 'Driving License';
+        } else if (riderType === 'Sitting behind') {
+          fileToUpload = idProofFile;
+          finalIdProofType = idProofType === 'Others' ? otherIdProofName : idProofType;
+        }
+      } else if (vehicleType === 'Car') {
         fileToUpload = idProofFile;
         finalIdProofType = idProofType === 'Others' ? otherIdProofName : idProofType;
       }
       
-      if (!fileToUpload && (isRider || riderType === 'Sitting behind')) {
-          setFeedbackMessage(isRider ? 'Please upload your driving license photo.' : 'Please upload your ID proof.');
+      if (!fileToUpload) {
+          if (vehicleType === 'Scooter' && isRider) {
+             setFeedbackMessage('Please upload your driving license photo.');
+          } else {
+             setFeedbackMessage('Please upload your ID proof.');
+          }
           setSubmissionStatus('error');
           return;
       }
@@ -170,8 +191,9 @@ const TourRegistrationPage: React.FC = () => {
         cityCountry,
         emergencyName,
         emergencyNumber: emergencyNumber || '',
-        hasLicense,
-        riderType,
+        vehicleType,
+        hasLicense: vehicleType === 'Scooter' ? hasLicense : 'N/A',
+        riderType: vehicleType === 'Scooter' ? riderType : 'Passenger (Car)',
         medicalInfo,
         allergies,
         bloodGroup,
@@ -182,7 +204,6 @@ const TourRegistrationPage: React.FC = () => {
       };
 
       // "Fire-and-forget" request using 'no-cors' mode.
-      // We cannot read the response, so we optimistically assume success.
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -353,46 +374,114 @@ const TourRegistrationPage: React.FC = () => {
             </fieldset>
 
             <fieldset className={formSectionClasses}>
-              <legend className="text-xl font-playfair font-bold mb-4 px-2">3. Rider Information</legend>
+              <legend className="text-xl font-playfair font-bold mb-4 px-2">3. Vehicle & ID Information</legend>
+              
               <div className="space-y-6">
+                {/* Vehicle Type Selection */}
                 <div>
-                  <label className={labelClasses}>Do you have a valid 2-wheeler driving licence?*</label>
+                  <label className={labelClasses}>Select Vehicle Type*</label>
                   <div className="flex flex-col md:flex-row gap-4 mt-2">
-                    <label className="flex items-center gap-2 p-3 border border-black/10 rounded-md flex-1 cursor-pointer hover:bg-white/10">
-                      <input type="radio" name="hasLicense" required value="Yes" checked={hasLicense === 'Yes'} onChange={e => setHasLicense(e.target.value)} className="accent-warm-gold-light" /> Yes
+                    <label className={`flex items-center gap-3 p-4 border border-black/10 rounded-lg flex-1 cursor-pointer transition-all ${vehicleType === 'Scooter' ? 'bg-warm-gold-light/10 border-warm-gold-light ring-1 ring-warm-gold-light' : 'hover:bg-white/10'}`}>
+                      <input type="radio" name="vehicleType" required value="Scooter" checked={vehicleType === 'Scooter'} onChange={e => setVehicleType(e.target.value)} className="accent-warm-gold-light w-5 h-5" />
+                      <Bike className="w-6 h-6 text-warm-gold-dark" />
+                      <span className="font-semibold">Scooter Tour</span>
                     </label>
-                    <label className="flex items-center gap-2 p-3 border border-black/10 rounded-md flex-1 cursor-pointer hover:bg-white/10">
-                      <input type="radio" name="hasLicense" value="No" checked={hasLicense === 'No'} onChange={e => setHasLicense(e.target.value)} className="accent-warm-gold-light" /> No, I will only be a pillion rider
-                    </label>
-                  </div>
-                </div>
-                <div>
-                  <label className={labelClasses}>Rider / Pillion*</label>
-                   <div className="flex flex-col md:flex-row gap-4 mt-2">
-                    <label className={`flex items-center gap-2 p-3 border border-black/10 rounded-md flex-1 transition-opacity ${hasLicense === 'No' ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-white/10'}`}>
-                      <input type="radio" name="riderType" required value="Riding a scooter" checked={riderType === 'Riding a scooter'} onChange={e => setRiderType(e.target.value)} className="accent-warm-gold-light" disabled={hasLicense === 'No'} /> Riding a scooter
-                    </label>
-                    <label className="flex items-center gap-2 p-3 border border-black/10 rounded-md flex-1 cursor-pointer hover:bg-white/10">
-                      <input type="radio" name="riderType" value="Sitting behind" checked={riderType === 'Sitting behind'} onChange={e => setRiderType(e.target.value)} className="accent-warm-gold-light" /> Sitting behind (pillion)
+                    <label className={`flex items-center gap-3 p-4 border border-black/10 rounded-lg flex-1 cursor-pointer transition-all ${vehicleType === 'Car' ? 'bg-warm-gold-light/10 border-warm-gold-light ring-1 ring-warm-gold-light' : 'hover:bg-white/10'}`}>
+                      <input type="radio" name="vehicleType" value="Car" checked={vehicleType === 'Car'} onChange={e => setVehicleType(e.target.value)} className="accent-warm-gold-light w-5 h-5" />
+                      <Car className="w-6 h-6 text-warm-gold-dark" />
+                      <span className="font-semibold">Car Tour</span>
                     </label>
                   </div>
                 </div>
-                
+
                 <AnimatePresence mode="wait">
-                  {isRider ? (
-                    <motion.div key="rider-upload" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="space-y-2">
-                      <label className={labelClasses}>Upload Driving Licence Photo*</label>
-                      <div className="mt-2">
-                        <label htmlFor="license-photo-file" className={fileButtonClasses}>
-                          <Upload className="mr-2 h-5 w-5" />
-                          Choose file
-                        </label>
-                        <input id="license-photo-file" type="file" accept="image/*" className="hidden" onChange={e => setLicensePhoto(e.target.files ? e.target.files[0] : null)} />
+                  {/* SCOOTER OPTIONS */}
+                  {vehicleType === 'Scooter' && (
+                    <motion.div
+                      key="scooter-options"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="space-y-6 overflow-hidden"
+                    >
+                      <div>
+                        <label className={labelClasses}>Do you have a valid 2-wheeler driving licence?*</label>
+                        <div className="flex flex-col md:flex-row gap-4 mt-2">
+                          <label className="flex items-center gap-2 p-3 border border-black/10 rounded-md flex-1 cursor-pointer hover:bg-white/10">
+                            <input type="radio" name="hasLicense" required value="Yes" checked={hasLicense === 'Yes'} onChange={e => setHasLicense(e.target.value)} className="accent-warm-gold-light" /> Yes
+                          </label>
+                          <label className="flex items-center gap-2 p-3 border border-black/10 rounded-md flex-1 cursor-pointer hover:bg-white/10">
+                            <input type="radio" name="hasLicense" value="No" checked={hasLicense === 'No'} onChange={e => setHasLicense(e.target.value)} className="accent-warm-gold-light" /> No, I will only be a pillion rider
+                          </label>
+                        </div>
                       </div>
-                      {licensePhoto && <p className="text-sm mt-2 text-green-700">File selected: {licensePhoto.name}</p>}
+                      <div>
+                        <label className={labelClasses}>Rider / Pillion*</label>
+                        <div className="flex flex-col md:flex-row gap-4 mt-2">
+                          <label className={`flex items-center gap-2 p-3 border border-black/10 rounded-md flex-1 transition-opacity ${hasLicense === 'No' ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:bg-white/10'}`}>
+                            <input type="radio" name="riderType" required value="Riding a scooter" checked={riderType === 'Riding a scooter'} onChange={e => setRiderType(e.target.value)} className="accent-warm-gold-light" disabled={hasLicense === 'No'} /> Riding a scooter
+                          </label>
+                          <label className="flex items-center gap-2 p-3 border border-black/10 rounded-md flex-1 cursor-pointer hover:bg-white/10">
+                            <input type="radio" name="riderType" value="Sitting behind" checked={riderType === 'Sitting behind'} onChange={e => setRiderType(e.target.value)} className="accent-warm-gold-light" /> Sitting behind (pillion)
+                          </label>
+                        </div>
+                      </div>
+                      
+                      {isRider ? (
+                        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="space-y-2">
+                          <label className={labelClasses}>Upload Driving Licence Photo*</label>
+                          <div className="mt-2">
+                            <label htmlFor="license-photo-file" className={fileButtonClasses}>
+                              <Upload className="mr-2 h-5 w-5" />
+                              Choose file
+                            </label>
+                            <input id="license-photo-file" type="file" accept="image/*" className="hidden" onChange={e => setLicensePhoto(e.target.files ? e.target.files[0] : null)} />
+                          </div>
+                          {licensePhoto && <p className="text-sm mt-2 text-green-700">File selected: {licensePhoto.name}</p>}
+                        </motion.div>
+                      ) : riderType === 'Sitting behind' ? (
+                        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+                          <div>
+                            <label className={labelClasses}>ID Proof Type*</label>
+                            <select required value={idProofType} onChange={e => setIdProofType(e.target.value)} className={inputClasses}>
+                              <option value="" disabled>Select ID type</option>
+                              <option value="Aadhaar Card">Aadhaar Card</option>
+                              <option value="Passport">Passport</option>
+                              <option value="Driving License">Driving License</option>
+                              <option value="Others">Other</option>
+                            </select>
+                          </div>
+                          {idProofType === 'Others' && (
+                            <div>
+                              <label className={labelClasses}>Please specify ID type*</label>
+                              <input type="text" required value={otherIdProofName} onChange={e => setOtherIdProofName(e.target.value)} className={inputClasses} placeholder="e.g., Voter ID Card" />
+                            </div>
+                          )}
+                          <div>
+                            <label className={labelClasses}>Upload ID Proof*</label>
+                            <div className="mt-2">
+                              <label htmlFor="id-proof-file" className={fileButtonClasses}>
+                                <Upload className="mr-2 h-5 w-5" />
+                                Choose file
+                              </label>
+                              <input id="id-proof-file" type="file" accept="image/*" className="hidden" onChange={e => setIdProofFile(e.target.files ? e.target.files[0] : null)} />
+                            </div>
+                            {idProofFile && <p className="text-sm mt-2 text-green-700">File selected: {idProofFile.name}</p>}
+                          </div>
+                        </motion.div>
+                      ) : null}
                     </motion.div>
-                  ) : riderType === 'Sitting behind' ? (
-                    <motion.div key="pillion-upload" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} className="space-y-4">
+                  )}
+
+                  {/* CAR OPTIONS */}
+                  {vehicleType === 'Car' && (
+                    <motion.div
+                      key="car-options"
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="space-y-6 overflow-hidden"
+                    >
                       <div>
                         <label className={labelClasses}>ID Proof Type*</label>
                         <select required value={idProofType} onChange={e => setIdProofType(e.target.value)} className={inputClasses}>
@@ -421,7 +510,7 @@ const TourRegistrationPage: React.FC = () => {
                         {idProofFile && <p className="text-sm mt-2 text-green-700">File selected: {idProofFile.name}</p>}
                       </div>
                     </motion.div>
-                  ) : null}
+                  )}
                 </AnimatePresence>
               </div>
             </fieldset>
