@@ -47,7 +47,42 @@ const StaysPage: React.FC = () => {
               </div>
             </motion.div>
 
-            {/* More Partners Coming Soon Card */}
+            {/* Moustache Escapes Card */}
+<motion.div
+  initial={{ opacity: 0, scale: 0.9 }}
+  whileInView={{ opacity: 1, scale: 1 }}
+  viewport={{ once: true, amount: 0.5 }}
+  transition={{ duration: 0.5, delay: 0.05 }}
+  className="relative bg-white rounded-xl shadow-2xl overflow-hidden group hover:shadow-[0_0_30px_rgba(255,199,0,0.2)] transition-all duration-500"
+>
+  <div className="aspect-[4/3] p-8 flex items-center justify-center bg-gradient-to-br from-white to-gray-50">
+    <img
+      src="/images/Moustache Escapes logo.webp"   // <-- Add your logo file here
+      alt="Moustache Escapes Logo"
+      className="w-full h-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+    />
+  </div>
+
+  <div className="p-6 bg-white border-t border-gray-100">
+    <div className="flex justify-between items-end">
+      <div>
+        <h2 className="font-playfair text-2xl font-bold text-theme-text-dark">Moustache Escapes</h2>
+        <p className="text-accent-gold font-semibold">Hospitality Partner</p>
+      </div>
+
+      <a
+        href="https://moustachescapes.com/stay/boutique-hotel/moustache-udaipur-verandah/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-theme-text-dark hover:text-accent-gold transition-colors duration-300"
+      >
+        <ArrowRight className="h-6 w-6 transform group-hover:translate-x-1 transition-transform" />
+      </a>
+    </div>
+  </div>
+</motion.div>
+
+         {/* More Partners Coming Soon Card */}
             <motion.div 
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}

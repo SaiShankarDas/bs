@@ -3,7 +3,7 @@ import PageTransition from '../components/PageTransition';
 import Hero from '../components/Hero';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Handshake, Map, Castle, Ship, MessageSquare, HeartHandshake, PartyPopper } from 'lucide-react';
+import { ArrowRight, Handshake, Map, Castle, Ship, MessageSquare, HeartHandshake, PartyPopper ,Bike, Car} from 'lucide-react';
 import DomeGallery from '../components/dome/DomeGallery';
 import { galleryImages } from '../data/galleryImages';
 import WhyChooseCard from '../components/home/WhyChooseCard';
@@ -47,14 +47,14 @@ const whyChooseData = [
         description: "Every partner is chosen for their character, comfort, and connection to local culture."
     },
     {
-        icon: Ship,
-        title: "Private Offbeat Tours",
-        description: "Experience Udaipur's grandeur with exclusive tours tailored to your pace and interests."
+        icon: Bike,
+        title: "Scooter Tours",
+        description: "Explore Udaipur’s narrow lanes and lakeside routes with guided scooter tours—fun, fast, and flexible."
     },
     {
-        icon: MessageSquare,
-        title: "24/7 Concierge Support",
-        description: "From booking to departure, our team is always here to ensure a seamless journey."
+        icon: Car,
+        title: "Car Tours",
+        description: "Enjoy private AC sedan/SUV tours with professional drivers for city sightseeing and outstation trips."
     }
 ];
 
