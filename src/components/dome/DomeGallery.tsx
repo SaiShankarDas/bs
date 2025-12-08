@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useMemo,
-  useRef,
-  useCallback,
-  CSSProperties
-} from 'react';
+import { useEffect, useMemo, useRef, useCallback } from 'react';
 import { useGesture } from '@use-gesture/react';
 import './DomeGallery.css';
 
@@ -107,13 +101,7 @@ function buildItems(pool: ImageItem[], seg: number): ItemDef[] {
   }));
 }
 
-function computeItemBaseRotation(
-  offsetX: number,
-  offsetY: number,
-  sizeX: number,
-  sizeY: number,
-  segments: number
-) {
+function computeItemBaseRotation(offsetX: number, offsetY: number, sizeX: number, sizeY: number, segments: number) {
   const unit = 360 / segments / 2;
   const rotateY = unit * (offsetX + (sizeX - 1) / 2);
   const rotateX = unit * (offsetY - (sizeY - 1) / 2);
@@ -193,12 +181,11 @@ export default function DomeGallery({
     if (!root) return;
     const ro = new ResizeObserver(entries => {
       const cr = entries[0].contentRect;
-      const w = Math.max(1, cr.width);
-      const h = Math.max(1, cr.height);
-      const minDim = Math.min(w, h);
-      const maxDim = Math.max(w, h);
-      const aspect = w / h;
-
+      const w = Math.max(1, cr.width),
+        h = Math.max(1, cr.height);
+      const minDim = Math.min(w, h),
+        maxDim = Math.max(w, h),
+        aspect = w / h;
       let basis: number;
       switch (fitBasis) {
         case 'min':
@@ -216,7 +203,6 @@ export default function DomeGallery({
         default:
           basis = aspect >= 1.3 ? w : minDim;
       }
-
       let radius = basis * fit;
       const heightGuard = h * 1.35;
       radius = Math.min(radius, heightGuard);
@@ -308,11 +294,7 @@ export default function DomeGallery({
           inertiaRAF.current = null;
           return;
         }
-        const nextX = clamp(
-          rotationRef.current.x - vY / 200,
-          -maxVerticalRotationDeg,
-          maxVerticalRotationDeg
-        );
+        const nextX = clamp(rotationRef.current.x - vY / 200, -maxVerticalRotationDeg, maxVerticalRotationDeg);
         const nextY = wrapAngleSigned(rotationRef.current.y + vX / 200);
         rotationRef.current = { x: nextX, y: nextY };
         applyTransform(nextX, nextY);
@@ -344,8 +326,7 @@ export default function DomeGallery({
 
         if (!movedRef.current) {
           const dist2 = dxTotal * dxTotal + dyTotal * dyTotal;
-          // 🔧 Increased threshold so small finger jitter on mobile doesn't count as drag
-          if (dist2 > 64) movedRef.current = true;
+          if (dist2 > 16) movedRef.current = true;
         }
 
         const nextX = clamp(
@@ -392,9 +373,6 @@ export default function DomeGallery({
     openingRef.current = true;
     openStartedAtRef.current = performance.now();
     lockScroll();
-
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 600;
-    const transitionMs = isMobile ? Math.round(enlargeTransitionMs * 0.8) : enlargeTransitionMs;
 
     const parent = el.parentElement as HTMLElement;
     focusedElRef.current = el;
@@ -444,7 +422,7 @@ export default function DomeGallery({
     overlay.style.zIndex = '30';
     overlay.style.willChange = 'transform, opacity';
     overlay.style.transformOrigin = 'top left';
-    overlay.style.transition = `transform ${transitionMs}ms ease, opacity ${transitionMs}ms ease`;
+    overlay.style.transition = `transform ${enlargeTransitionMs}ms ease, opacity ${enlargeTransitionMs}ms ease`;
 
     const rawSrc = parent.dataset.src || (el.querySelector('img') as HTMLImageElement)?.src || '';
     const img = document.createElement('img');
@@ -478,7 +456,7 @@ export default function DomeGallery({
         overlay.style.width = frameR.width + 'px';
         overlay.style.height = frameR.height + 'px';
         void overlay.offsetWidth;
-        overlay.style.transition = `left ${transitionMs}ms ease, top ${transitionMs}ms ease, width ${transitionMs}ms ease, height ${transitionMs}ms ease`;
+        overlay.style.transition = `left ${enlargeTransitionMs}ms ease, top ${enlargeTransitionMs}ms ease, width ${enlargeTransitionMs}ms ease, height ${enlargeTransitionMs}ms ease`;
         const centeredLeft = frameR.left - mainR.left + (frameR.width - newRect.width) / 2;
         const centeredTop = frameR.top - mainR.top + (frameR.height - newRect.height) / 2;
         requestAnimationFrame(() => {
@@ -514,7 +492,12 @@ export default function DomeGallery({
     openItemFromElement(e.currentTarget);
   }, []);
 
-  // ❌ onTouchEnd removed to avoid double-trigger with pointer/click on mobile
+  const onTileTouchEnd = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    if (draggingRef.current) return;
+    if (performance.now() - lastDragEndAt.current < 80) return;
+    if (openingRef.current) return;
+    openItemFromElement(e.currentTarget);
+  }, []);
 
   useEffect(() => {
     const scrim = scrimRef.current;
@@ -673,7 +656,7 @@ export default function DomeGallery({
           ['--tile-radius' as any]: imageBorderRadius,
           ['--enlarge-radius' as any]: openedImageBorderRadius,
           ['--image-filter' as any]: grayscale ? 'grayscale(1)' : 'none'
-        } as CSSProperties
+        } as React.CSSProperties
       }
     >
       <main ref={mainRef} className="sphere-main">
@@ -694,7 +677,7 @@ export default function DomeGallery({
                     ['--offset-y' as any]: it.y,
                     ['--item-size-x' as any]: it.sizeX,
                     ['--item-size-y' as any]: it.sizeY
-                  } as CSSProperties
+                  } as React.CSSProperties
                 }
               >
                 <div
@@ -704,6 +687,7 @@ export default function DomeGallery({
                   aria-label={it.alt || 'Open image'}
                   onClick={onTileClick}
                   onPointerUp={onTilePointerUp}
+                  onTouchEnd={onTileTouchEnd}
                 >
                   <img src={it.src} draggable={false} alt={it.alt} loading="lazy" />
                 </div>
