@@ -3,7 +3,7 @@ import PageTransition from '../components/PageTransition';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Bike, Car, MapPin, Clock, BadgeCheck, ShieldAlert, HardHat, CloudSun, CircleDollarSign,
-  Briefcase, UserCheck, Camera, HeartPulse, LoaderCircle, CheckCircle, AlertTriangle, FileText, Upload
+  Briefcase, UserCheck, Camera, HeartPulse, LoaderCircle, CheckCircle, AlertTriangle, FileText, Upload, Instagram
 } from 'lucide-react';
 import DatePicker from 'react-datepicker';
 import PhoneInput from 'react-phone-number-input';
@@ -25,6 +25,7 @@ const terms = [
   { icon: UserCheck, text: 'Behavior & Discipline – Kindly follow the tour leader’s instructions. Any misbehavior, reckless riding or unsafe actions may lead to removal from the tour.' },
   { icon: Camera, text: 'Photography / Videography – Photos & videos captured during the tour may be used for promotional purposes by Bharatescapes.' },
   { icon: HeartPulse, text: 'Fitness & Alcohol – Participants under alcohol influence or medically unfit for riding may be denied participation without refund.' },
+  { icon: Instagram, text: 'Photo/Video Delivery – Photos & videos will be delivered only after you follow us on Instagram & message us there with the date & type of tour.' },
 ];
 
 type SubmissionStatus = 'idle' | 'submitting' | 'success' | 'error';
