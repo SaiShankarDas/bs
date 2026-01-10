@@ -3,7 +3,7 @@ import PageTransition from '../components/PageTransition';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Bike, Car, MapPin, Clock, BadgeCheck, ShieldAlert, HardHat, CloudSun, CircleDollarSign,
-  Briefcase, UserCheck, Camera, HeartPulse, LoaderCircle, CheckCircle, AlertTriangle, FileText, Upload, Instagram
+  Briefcase, UserCheck, Camera, HeartPulse, LoaderCircle, CheckCircle, AlertTriangle, FileText, Upload, Instagram, CarFront
 } from 'lucide-react';
 import DatePicker from 'react-datepicker';
 import PhoneInput from 'react-phone-number-input';
@@ -26,6 +26,7 @@ const terms = [
   { icon: Camera, text: 'Photography / Videography – Photos & videos captured during the tour may be used for promotional purposes by Bharatescapes.' },
   { icon: HeartPulse, text: 'Fitness & Alcohol – Participants under alcohol influence or medically unfit for riding may be denied participation without refund.' },
   { icon: Instagram, text: 'Photo/Video Delivery – Photos & videos will be delivered only after you follow us on Instagram & message us there with the date & type of tour.' },
+  { icon: CarFront, text: 'Evening tours can be done by Auto/scooty as per the Availability' },
 ];
 
 type SubmissionStatus = 'idle' | 'submitting' | 'success' | 'error';
@@ -48,20 +49,20 @@ const TourRegistrationPage: React.FC = () => {
   const [tourType, setTourType] = useState('');
   const [tourDate, setTourDate] = useState<Date | null>(null); // Used for single tour OR Sunrise date
   const [tourDate2, setTourDate2] = useState<Date | null>(null); // Used for Sunset date when "Both" is selected
-  
+
   const [fullName, setFullName] = useState('');
   const [mobileNumber, setMobileNumber] = useState<string | undefined>();
   const [email, setEmail] = useState('');
   const [cityCountry, setCityCountry] = useState('');
   const [emergencyName, setEmergencyName] = useState('');
   const [emergencyNumber, setEmergencyNumber] = useState<string | undefined>();
-  
+
   // Vehicle & Rider State
   const [vehicleType, setVehicleType] = useState(''); // 'Scooter' | 'Car'
   const [hasLicense, setHasLicense] = useState('');
   const [riderType, setRiderType] = useState('');
   const [licensePhoto, setLicensePhoto] = useState<File | null>(null);
-  
+
   // Health Info
   const [medicalInfo, setMedicalInfo] = useState('');
   const [allergies, setAllergies] = useState('');
@@ -97,7 +98,7 @@ const TourRegistrationPage: React.FC = () => {
   const resetForm = () => {
     setTourType(''); setTourDate(null); setTourDate2(null); setFullName(''); setMobileNumber(undefined);
     setEmail(''); setCityCountry(''); setEmergencyName(''); setEmergencyNumber(undefined);
-    setVehicleType(''); setHasLicense(''); setRiderType(''); setLicensePhoto(null); 
+    setVehicleType(''); setHasLicense(''); setRiderType(''); setLicensePhoto(null);
     setMedicalInfo(''); setAllergies(''); setBloodGroup(''); setIsTermsAgreed(false);
     setIdProofType(''); setOtherIdProofName(''); setIdProofFile(null);
   };
@@ -120,19 +121,19 @@ const TourRegistrationPage: React.FC = () => {
 
     // Validate dates for "Both" option
     if (isBothTours && (!tourDate || !tourDate2)) {
-        setFeedbackMessage('Please select dates for both Sunrise and Sunset tours.');
-        setSubmissionStatus('error');
-        return;
+      setFeedbackMessage('Please select dates for both Sunrise and Sunset tours.');
+      setSubmissionStatus('error');
+      return;
     }
 
     if (!vehicleType) {
-        setFeedbackMessage('Please select a vehicle type.');
-        setSubmissionStatus('error');
-        return;
+      setFeedbackMessage('Please select a vehicle type.');
+      setSubmissionStatus('error');
+      return;
     }
 
     setSubmissionStatus('submitting');
-    
+
     try {
       let fileToUpload: File | null = null;
       let finalIdProofType: string = '';
@@ -149,15 +150,15 @@ const TourRegistrationPage: React.FC = () => {
         fileToUpload = idProofFile;
         finalIdProofType = idProofType === 'Others' ? otherIdProofName : idProofType;
       }
-      
+
       if (!fileToUpload) {
-          if (vehicleType === 'Scooter' && isRider) {
-             setFeedbackMessage('Please upload your driving license photo.');
-          } else {
-             setFeedbackMessage('Please upload your ID proof.');
-          }
-          setSubmissionStatus('error');
-          return;
+        if (vehicleType === 'Scooter' && isRider) {
+          setFeedbackMessage('Please upload your driving license photo.');
+        } else {
+          setFeedbackMessage('Please upload your ID proof.');
+        }
+        setSubmissionStatus('error');
+        return;
       }
 
       let base64File = '';
@@ -301,40 +302,40 @@ const TourRegistrationPage: React.FC = () => {
                   <>
                     <div>
                       <label className={labelClasses}>Sunrise Tour Date*</label>
-                      <DatePicker 
-                        required 
-                        selected={tourDate} 
-                        onChange={(date: Date) => setTourDate(date)} 
-                        minDate={new Date()} 
-                        placeholderText="Select Sunrise Date" 
+                      <DatePicker
+                        required
+                        selected={tourDate}
+                        onChange={(date: Date) => setTourDate(date)}
+                        minDate={new Date()}
+                        placeholderText="Select Sunrise Date"
                         className={inputClasses}
                         dateFormat="dd/MM/yyyy"
                       />
                     </div>
                     <div>
                       <label className={labelClasses}>Sunset Tour Date*</label>
-                      <DatePicker 
-                        required 
-                        selected={tourDate2} 
-                        onChange={(date: Date) => setTourDate2(date)} 
-                        minDate={new Date()} 
-                        placeholderText="Select Sunset Date" 
+                      <DatePicker
+                        required
+                        selected={tourDate2}
+                        onChange={(date: Date) => setTourDate2(date)}
+                        minDate={new Date()}
+                        placeholderText="Select Sunset Date"
                         className={inputClasses}
                         dateFormat="dd/MM/yyyy"
                       />
                     </div>
                     {/* Empty div to maintain grid layout if needed, or let it flow */}
-                    <div className="hidden md:block"></div> 
+                    <div className="hidden md:block"></div>
                   </>
                 ) : (
                   <div>
                     <label className={labelClasses}>Tour Date*</label>
-                    <DatePicker 
-                      required 
-                      selected={tourDate} 
-                      onChange={(date: Date) => setTourDate(date)} 
-                      minDate={new Date()} 
-                      placeholderText="Select a date" 
+                    <DatePicker
+                      required
+                      selected={tourDate}
+                      onChange={(date: Date) => setTourDate(date)}
+                      minDate={new Date()}
+                      placeholderText="Select a date"
                       className={inputClasses}
                       dateFormat="dd/MM/yyyy"
                     />
@@ -376,7 +377,7 @@ const TourRegistrationPage: React.FC = () => {
 
             <fieldset className={formSectionClasses}>
               <legend className="text-xl font-playfair font-bold mb-4 px-2">3. Vehicle & ID Information</legend>
-              
+
               <div className="space-y-6">
                 {/* Vehicle Type Selection */}
                 <div>
@@ -427,7 +428,7 @@ const TourRegistrationPage: React.FC = () => {
                           </label>
                         </div>
                       </div>
-                      
+
                       {isRider ? (
                         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="space-y-2">
                           <label className={labelClasses}>Upload Driving Licence Photo*</label>
