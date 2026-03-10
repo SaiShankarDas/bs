@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Mail, Phone, Camera,Youtube } from 'lucide-react';
+import { Instagram, Mail, Phone, Camera, Youtube } from 'lucide-react';
 import WhatsAppIcon from './common/WhatsAppIcon';
+import ShnkrDevBadge from './ShnkrDevBadge';
 
 const Footer: React.FC = () => {
   return (
-    <footer 
-      id="footer" 
+    <footer
+      id="footer"
       className="bg-theme-light-bg text-theme-text-dark"
     >
       <div className="container mx-auto px-6 pt-12">
@@ -33,14 +34,14 @@ const Footer: React.FC = () => {
               <a href="https://www.instagram.com/bharatescapes/" target="_blank" rel="noopener noreferrer" className="text-theme-text-dark/80 hover:text-theme-accent-orange-end transition-all duration-300 hover:scale-110" aria-label="Visit our Instagram">
                 <Instagram className="h-6 w-6" />
               </a>
-           <a
-  href="https://youtube.com/@bharatescapes?si=N3M9XrOnPKUqEcag"
-  target="_blank"
-  rel="noopener noreferrer"
-  aria-label="Visit our YouTube"
->
-  <Youtube className="h-7 w-7 text-theme-text-dark/80 hover:text-theme-accent-orange-end transition-all duration-300 hover:scale-110" />
-</a>
+              <a
+                href="https://youtube.com/@bharatescapes?si=N3M9XrOnPKUqEcag"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit our YouTube"
+              >
+                <Youtube className="h-7 w-7 text-theme-text-dark/80 hover:text-theme-accent-orange-end transition-all duration-300 hover:scale-110" />
+              </a>
               <a href="https://wa.me/917976789334?text=Hi%20Bharatescapes%2C%0AI'd%20like%20to%20book%20a%20tour%20with%20Bharatescapes.%0ACan%20you%20share%20the%20best%20options%3F" target="_blank" rel="noopener noreferrer" className="text-theme-text-dark/80 hover:text-theme-accent-orange-end transition-all duration-300 hover:scale-110" aria-label="Chat on WhatsApp">
                 <WhatsAppIcon className="h-6 w-6" />
               </a>
@@ -55,25 +56,25 @@ const Footer: React.FC = () => {
             {/* Action Buttons */}
             <div className="flex flex-col items-center md:items-start gap-3 mt-6">
               {/* WhatsApp Community Button */}
-              <a 
+              <a
                 href="https://chat.whatsapp.com/JZw3BkBXC8GDVb4TKtSMzJ?mode=hqrt3"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold py-2 px-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 w-[210px]"
               >
                 <WhatsAppIcon className="w-8 h-8 text-white drop-shadow-sm flex-shrink-0" />
-                <span className="text-xs text-left leading-tight tracking-tight">Join our<br/>WhatsApp Community</span>
+                <span className="text-xs text-left leading-tight tracking-tight">Join our<br />WhatsApp Community</span>
               </a>
 
               {/* Get Your Photos Button */}
-              <a 
+              <a
                 href="https://docs.google.com/forms/d/e/1FAIpQLSfsVDvUWXkHBvjS2ay4V9HEQDjhJyGW5RRg-r8xV6mNDMO4Gw/viewform?usp=dialog" // Placeholder link - please update with actual URL
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 bg-[#4285F4] hover:bg-[#3367d6] text-white font-semibold py-2 px-3 rounded-lg transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 w-[210px]"
               >
                 <Camera className="w-8 h-8 text-white drop-shadow-sm flex-shrink-0" />
-                <span className="text-xs text-left leading-tight tracking-tight">Get Your<br/>Photos</span>
+                <span className="text-xs text-left leading-tight tracking-tight">Get Your<br />Photos</span>
               </a>
             </div>
           </div>
@@ -81,6 +82,11 @@ const Footer: React.FC = () => {
 
         <div className="text-center py-5 mt-8 border-t border-black/10">
           <p className="text-sm text-theme-text-dark/70">&copy; {new Date().getFullYear()} Bharatescapes | All Rights Reserved</p>
+        </div>
+
+        {/* SHNKR.DEV Architect Badge */}
+        <div className="border-t border-black/10 pt-6 mt-6 mb-6 flex justify-center items-center">
+          <ShnkrDevBadge />
         </div>
       </div>
     </footer>
