@@ -37,9 +37,9 @@ const ShnkrDevBadge: React.FC = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6 }}
             >
-                {/* Background filled logo (dark fill for light footer) */}
+                {/* Background filled logo (neon orange fill requested by user) */}
                 {paths.map((d, i) => (
-                    <path key={`bg-${i}`} d={d} fill="#2E2E2E" />
+                    <path key={`bg-${i}`} d={d} fill="#F2540F" />
                 ))}
                 {/* Animated neon stroke */}
                 {paths.map((d, i) => (
