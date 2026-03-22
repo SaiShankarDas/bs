@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const navLinks = [
-  { name: 'Home', to: '/' },
+  { name: 'Home', to: '/udaipur' },
   { name: 'Tours', to: '/tours' },
   { name: 'Events', to: '/events' },
   { name: 'Gallery', to: '/gallery' },
@@ -16,6 +16,13 @@ const navLinks = [
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const location = useLocation();
+  const isUttarakhand = location.pathname.startsWith('/uttarakhand');
+  
+  const currentNavLinks = isUttarakhand 
+    ? navLinks.filter(link => link.name === 'Book Now')
+    : navLinks;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +49,7 @@ const Header: React.FC = () => {
         </Link>
         <div>
           <nav className="hidden md:flex items-center space-x-1">
-            {navLinks.map((link) => (
+            {currentNavLinks.map((link) => (
               <NavLink
                 key={link.name}
                 to={link.to}
@@ -73,7 +80,7 @@ const Header: React.FC = () => {
           className="md:hidden bg-theme-light-bg absolute top-0 left-0 w-full"
         >
           <nav className="flex flex-col items-center justify-center h-full space-y-6">
-            {navLinks.map((link) => (
+            {currentNavLinks.map((link) => (
               <NavLink
                 key={link.name}
                 to={link.to}

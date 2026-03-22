@@ -1,7 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { useInView, animate } from 'framer-motion';
 
-const TravellersCounter: React.FC = () => {
+interface TravellersCounterProps {
+  location?: string;
+}
+
+const TravellersCounter: React.FC<TravellersCounterProps> = ({ location = 'Udaipur' }) => {
   const countRef = useRef<HTMLSpanElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
@@ -37,7 +41,7 @@ const TravellersCounter: React.FC = () => {
 
         {/* Bottom Line */}
         <p className="font-playfair text-4xl md:text-5xl font-bold text-text-light leading-tight transition-all duration-500 hover:text-accent-gold hover:drop-shadow-[0_0_15px_rgba(255,199,0,0.3)]">
-          travellers explored Udaipur <br className="hidden md:block" />
+          Travellers explored {location && `${location} `}<br className="hidden md:block" />
           with us!
         </p>
       </div>
