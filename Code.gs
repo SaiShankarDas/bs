@@ -1,130 +1,131 @@
 /**
- * @description Handles POST requests from the Bharatescapes Tour Registration form.
- * It saves the uploaded file to a specific Google Drive folder and appends the
- * form data, including the file URL, to a Google Sheet.
- *
- * @param {Object} e - The event parameter for a POST request.
- * @returns {ContentService.TextOutput} A JSON object indicating success or error.
+ * Bharatescapes Trip Registration Backend
+ * Handles multiple file uploads (ID, Payment, Signature) and logs data to Google Sheets.
  */
 
-// --- CONFIGURATION ---
-const SPREADSHEET_ID = "1qhSG1qWNch7fSazUGRlyhXM9F8O70wvs6aCFNhBGJ5k";
-const GOOGLE_DRIVE_FOLDER_ID = "1ljIhAcNDw-XDl8vhOYwBaG2rQzBts0YX";
-const TOUR_REGISTRATIONS_SHEET_NAME = "Tour Registrations";
-const CONTACT_INQUIRIES_SHEET_NAME = "Contact Inquiries";
+// ========== CONFIGURATION ==========
+const SPREADSHEET_ID = "1QZO6vDvV2gK--AVY0DXFKvGaXw_DuCo_jeB3u4N9eUQ";
+const GOOGLE_DRIVE_FOLDER_ID = "1Z-HE2NHvbkxUsfsVeJg6Lo9Ml_SXICc6";
+const SHEET_NAME = "Trip Registrations";
+const ADMIN_EMAIL = "whereabouthostels@gmail.com";
+// ====================================
 
-/**
- * Main entry point for all POST requests from your website.
- * NOTE: Running this function manually from the Apps Script editor will always result in an error,
- * because the 'e' (event) object is not provided. It must be triggered by a real form submission.
- */
 function doPost(e) {
   try {
     if (!e || !e.postData || !e.postData.contents) {
-      throw new Error("Invalid request: No POST data received. This is expected if running the script manually.");
-    }
-    
-    const data = JSON.parse(e.postData.contents);
-    Logger.log("Received data for form: " + (data.formType || 'Unknown'));
-    
-    const formType = data.formType;
-    
-    if (formType === 'contact') {
-      return handleContactInquiry(data);
-    } else if (formType === 'tour-registration') {
-      return handleTourRegistration(data);
-    } else {
-      throw new Error("Processing error: 'formType' is missing or unknown. Received: " + formType);
+      throw new Error("Invalid request: No POST data received.");
     }
 
-  } catch (error) {
-    Logger.log("CRITICAL doPost Error: " + error.toString() + " Stack: " + (error.stack || 'No stack available'));
+    var data = JSON.parse(e.postData.contents);
+    Logger.log("Received data for: " + (data.fullName || "Unknown"));
+
+    var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+    var sheet = ss.getSheetByName(SHEET_NAME);
+    if (!sheet) {
+      throw new Error('Sheet "' + SHEET_NAME + '" not found. Please create a sheet named "' + SHEET_NAME + '".');
+    }
+
+    var folder = DriveApp.getFolderById(GOOGLE_DRIVE_FOLDER_ID);
+
+    // --- Helper: Save Base64 File to Drive ---
+    function saveFileToDrive(base64Data, prefix) {
+      if (!base64Data || base64Data.length < 50) return "N/A";
+      try {
+        var parts = base64Data.split(',');
+        if (parts.length < 2) return "Invalid base64 format";
+
+        var mimeMatch = parts[0].match(/data:(.*?);/);
+        var mimeType = mimeMatch ? mimeMatch[1] : 'image/png';
+        var extension = mimeType.split('/')[1] || 'png';
+        if (extension === 'jpeg') extension = 'jpg';
+
+        var decoded = Utilities.base64Decode(parts[1]);
+        var safeName = (data.fullName || "unknown").replace(/[^a-z0-9]/gi, '_').toLowerCase();
+        var fileName = prefix + "_" + safeName + "_" + Date.now() + "." + extension;
+
+        var blob = Utilities.newBlob(decoded, mimeType, fileName);
+        var file = folder.createFile(blob);
+        file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+        
+        return file.getUrl();
+      } catch (err) {
+        Logger.log("Upload error (" + prefix + "): " + err.toString());
+        return "Upload Error: " + err.toString();
+      }
+    }
+
+    // --- Process Uploads ---
+    var idPhotoUrl = saveFileToDrive(data.idPhoto, "id");
+    var paymentProofUrl = saveFileToDrive(data.paymentProof, "payment");
+    var signatureUrl = saveFileToDrive(data.signature, "sig");
+
+    // Debug logging to help identify why cells are empty
+    Logger.log("ID Photo: " + (data.idPhoto ? "received (" + data.idPhoto.length + " chars)" : "NOT received"));
+    Logger.log("Payment Proof: " + (data.paymentProof ? "received (" + data.paymentProof.length + " chars)" : "NOT received"));
+    Logger.log("Signature: " + (data.signature ? "received (" + data.signature.length + " chars)" : "NOT received"));
+
+    // --- Prepare Row Data (27 Columns: A to AA) ---
+    var rowData = [
+      new Date(),                        // A: Timestamp
+      data.destination || "",            // B: Destination
+      data.fullName || "",               // C: Full Name
+      data.dob || "",                    // D: DOB
+      data.gender || "",                 // E: Gender
+      data.nationality || "",            // F: Nationality
+      data.phone || "",                  // G: Phone
+      data.email || "",                  // H: Email
+      data.address || "",                // I: Address
+      data.emergencyName || "",          // J: Emergency Name
+      data.emergencyRelationship || "",  // K: Emergency Relationship
+      data.emergencyPhone || "",         // L: Emergency Phone
+      data.tripDates || "",              // M: Trip Dates
+      data.departureCity || "",          // N: Departure City
+      data.participants || "",           // O: Participants
+      data.hasMedicalCondition || "",    // P: Medical Conditions
+      data.medicalDetails || "",         // Q: Medical Details
+      data.physicallyFit || "",          // R: Physically Fit
+      data.allergies || "",              // S: Allergies
+      data.idType || "",                 // T: ID Type
+      idPhotoUrl,                        // U: ID Photo URL
+      data.accommodation || "",          // V: Accommodation
+      data.totalCost || "",              // W: Total Cost
+      data.amountPaid || "",             // X: Amount Paid
+      data.paymentMode || "",            // Y: Payment Mode
+      paymentProofUrl,                   // Z: Payment Proof URL
+      signatureUrl                       // AA: Signature URL
+    ];
+
+    sheet.appendRow(rowData);
+    SpreadsheetApp.flush();
+
+    // --- Send Email Notification ---
+    try {
+      var subject = "✅ New Trip Registration - " + (data.fullName || "Guest");
+      var body = "New Trip Registration Details:\n\n" +
+                 "👤 Name: " + data.fullName + "\n" +
+                 "📍 Destination: " + data.destination + "\n\n" +
+                 "📎 Links:\n" +
+                 "--- ID Photo: " + idPhotoUrl + "\n" +
+                 "--- Payment Proof: " + paymentProofUrl + "\n" +
+                 "--- Signature: " + signatureUrl + "\n\n" +
+                 "🕒 Submitted on: " + new Date().toString();
+
+      MailApp.sendEmail(ADMIN_EMAIL, subject, body);
+    } catch (e) {
+      Logger.log("Email notification failed: " + e.toString());
+    }
+
     return ContentService
-      .createTextOutput(JSON.stringify({ result: 'error', error: "Server-side script error: " + error.message }))
+      .createTextOutput(JSON.stringify({ result: 'success' }))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    Logger.log("POST ERROR: " + error.toString());
+    return ContentService
+      .createTextOutput(JSON.stringify({ result: 'error', message: error.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
   }
 }
-
-/**
- * Handles submissions for the Tour Registration form.
- */
-function handleTourRegistration(data) {
-  try {
-    Logger.log("Starting handleTourRegistration for: " + data.fullName);
-    
-    const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(TOUR_REGISTRATIONS_SHEET_NAME);
-    if (!sheet) {
-      // This is a common point of failure.
-      throw new Error(`Configuration error: A sheet with the exact name "${TOUR_REGISTRATIONS_SHEET_NAME}" was not found. Please check for typos.`);
-    }
-    
-    const folder = DriveApp.getFolderById(GOOGLE_DRIVE_FOLDER_ID);
-    let fileUrl = 'N/A';
-
-    if (data.fileData && data.mimeType && data.fileName) {
-      Logger.log("File data found. Uploading to Drive.");
-      const decoded = Utilities.base64Decode(data.fileData);
-      const blob = Utilities.newBlob(decoded, data.mimeType, data.fileName);
-      const uniqueFileName = `${data.fullName || 'Unknown'}_${data.idProofType || 'ID'}_${new Date().getTime()}`;
-      const newFile = folder.createFile(blob).setName(uniqueFileName);
-      newFile.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-      fileUrl = newFile.getUrl();
-      Logger.log("File uploaded successfully: " + fileUrl);
-    } else {
-      Logger.log("No file data was included in the submission for " + data.fullName);
-    }
-
-    const rowData = [
-      new Date(),
-      data.tourType || '', data.tourDate || '', data.fullName || '',
-      data.mobileNumber || '', data.email || '', data.cityCountry || '',
-      data.emergencyName || '', data.emergencyNumber || '', data.vehicleType || '',  data.hasLicense || '',
-      data.riderType || '', data.medicalInfo || '', data.allergies || '',
-      data.bloodGroup || '', data.idProofType || 'N/A', fileUrl
-    ];
-    
-    Logger.log("Data prepared. Appending to sheet: " + JSON.stringify(rowData));
-    
-    sheet.appendRow(rowData);
-    
-    // Force the updates to be written to the sheet immediately.
-    SpreadsheetApp.flush();
-    
-    Logger.log("Successfully appended row for: " + data.fullName);
-
-    return ContentService
-      .createTextOutput(JSON.stringify({ result: 'success', form: 'tour-registration' }))
-      .setMimeType(ContentService.MimeType.JSON);
-
-  } catch (error) {
-    Logger.log("ERROR in handleTourRegistration: " + error.toString() + " Stack: " + (error.stack || 'No stack available'));
-    throw error;
-  }
-}
-
-/**
- * Handles submissions for the Contact Us form.
- */
-function handleContactInquiry(data) {
-  try {
-    const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(CONTACT_INQUIRIES_SHEET_NAME);
-    if (!sheet) {
-      throw new Error(`Configuration error: Sheet with name "${CONTACT_INQUIRIES_SHEET_NAME}" was not found.`);
-    }
-    const rowData = [
-      new Date(), data.name || '', data.whatsapp || '', data.email || '',
-      data.people || '', data.dates || '', data.message || ''
-    ];
-    sheet.appendRow(rowData);
-    SpreadsheetApp.flush();
-    Logger.log("Appended row to Contact Inquiries for: " + data.name);
-
-    return ContentService
-      .createTextOutput(JSON.stringify({ result: 'success', form: 'contact-inquiry' }))
-      .setMimeType(ContentService.MimeType.JSON);
-
-  } catch (error) {
-    Logger.log("ERROR in handleContactInquiry: " + error.toString() + " Stack: " + (error.stack || 'No stack available'));
-    throw error;
+vice.MimeType.JSON);
   }
 }

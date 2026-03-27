@@ -12,6 +12,7 @@ const SplashPage = lazy(() => import('./pages/SplashPage'));
 const HomePage = lazy(() => import('./pages/HomePage'));
 const UttarakhandPage = lazy(() => import('./pages/UttarakhandPage'));
 const ChoptaItineraryPage = lazy(() => import('./pages/ChoptaItineraryPage'));
+const ChoptaRegistrationPage = lazy(() => import('./pages/ChoptaRegistrationPage'));
 const ToursPage = lazy(() => import('./pages/ToursPage'));
 const StaysPage = lazy(() => import('./pages/StaysPage'));
 const EventsPage = lazy(() => import('./pages/EventsPage'));
@@ -37,6 +38,7 @@ function App() {
               <Route path="/udaipur" element={<HomePage />} />
               <Route path="/uttarakhand" element={<UttarakhandPage />} />
               <Route path="/uttarakhand/chopta-tungnath" element={<ChoptaItineraryPage />} />
+              <Route path="/uttarakhand/register" element={<ChoptaRegistrationPage />} />
               <Route path="/tours" element={<ToursPage />} />
               <Route path="/stays" element={<StaysPage />} />
               <Route path="/events" element={<EventsPage />} />

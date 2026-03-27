@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import PageTransition from '../components/PageTransition';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+
 import { ArrowRight, Map, HeartHandshake, Mountain, Sunrise, ChevronLeft, ChevronRight } from 'lucide-react';
 import WhyChooseCard from '../components/home/WhyChooseCard';
 import TravellersCounter from '../components/home/TravellersCounter';

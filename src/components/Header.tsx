@@ -21,7 +21,7 @@ const Header: React.FC = () => {
   const isUttarakhand = location.pathname.startsWith('/uttarakhand');
   
   const currentNavLinks = isUttarakhand 
-    ? navLinks.filter(link => link.name === 'Book Now')
+    ? [{ name: 'Register', to: '/uttarakhand/register' }, ...navLinks.filter(link => link.name === 'Book Now')]
     : navLinks;
 
   useEffect(() => {

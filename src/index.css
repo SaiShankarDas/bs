@@ -147,7 +147,7 @@ html {
 }
 
 .react-datepicker-popper {
-  z-index: 20 !important;
+  z-index: 9999 !important;
 }
 
 .react-datepicker {
