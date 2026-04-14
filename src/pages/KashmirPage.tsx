@@ -9,93 +9,59 @@ import TravellersCounter from '../components/home/TravellersCounter';
 
 const carouselData = [
     {
-        title: "Chopta-Tungnath Trek",
-        description: "Experience the magic of the Himalayas with a trek to the highest Shiva temple.",
-        link: "/uttarakhand/chopta-tungnath",
-        image: "/destinations/chopta_tungnath_1774209147259.png"
-    },
-    {
-        title: "Munsiyari Khaliya Top",
-        description: "A breathtaking paradise offering panoramic views of the majestic Panchachuli peaks alongside an exciting trek.",
+        title: "Srinagar",
+        description: "Experience houseboats on Dal Lake and vibrant Mughal Gardens.",
         link: "/contact",
-        image: "/destinations/munsiyari_1774209199141.png",
+        image: "/images/destinations/srinagar.png",
         comingSoon: true
     },
     {
-        title: "Chakrata",
-        description: "A secluded hill station known for its pristine beauty, lush forests, and the stunning Tiger Falls.",
+        title: "Gulmarg",
+        description: "A premier ski destination known for its pine-fringed meadows and gondola rides.",
         link: "/contact",
-        image: "/images/destinations/chakrata.png",
+        image: "/images/destinations/gulmarg.png",
         comingSoon: true
     },
     {
-        title: "Kedarnath",
-        description: "One of the most sacred pilgrimage centers in Northern India, located amidst the majestic Himalayas.",
+        title: "Pahalgam",
+        description: "The Valley of Shepherds, perfect for trekking, fishing, and taking in mountain vistas.",
         link: "/contact",
-        image: "/images/destinations/kedarnath.png",
+        image: "/images/destinations/pahalgam.png",
         comingSoon: true
     },
     {
-        title: "Harshil Valley",
-        description: "An unspoiled and hidden jewel offering cascading waterfalls, apple orchards, and pine forests.",
+        title: "Sonamarg",
+        description: "The Meadow of Gold, surrounded by majestic glaciers and serene lakes.",
         link: "/contact",
-        image: "/images/destinations/harshil.png",
-        comingSoon: true
-    },
-    {
-        title: "Rishikesh",
-        description: "A serene and spiritual destination by the Ganges river, perfect for yoga and adventure.",
-        link: "/contact",
-        image: "/destinations/rishikesh_1774209162979.png",
-        comingSoon: true
-    },
-    {
-        title: "Char Dham",
-        description: "Embark on a divine journey to the four sacred shrines in the high-altitude Himalayas.",
-        link: "/contact",
-        image: "/destinations/char_dham_1774209180840.png",
+        image: "/images/destinations/sonamarg.png",
         comingSoon: true
     }
 ];
-
-const choptaGallery = [
-  "IMG_0570_c.jpg", "IMG_0571_c.jpg", "IMG_0574_c.jpg", "IMG_0576_c.jpg",
-  "IMG_0613_c.jpg", "IMG_0616_c.jpg", "IMG_0617_c.jpg", "IMG_0618_c.jpg",
-  "IMG_0621_c.jpg", "IMG_0624_c.jpg", "IMG_0625_c.jpg", "IMG_0626_c.jpg",
-  "IMG_0628_c.jpg", "IMG_0629_c.jpg", "IMG_0630_c.jpg", "IMG_0631_c.jpg",
-  "IMG_0632_c.jpg", "IMG_0634_c.jpg", "IMG_0635_c.jpg", "IMG_0636_c.jpg",
-  "IMG_0637_c.jpg", "IMG_0638_c.jpg", "IMG_0639_c.jpg", "IMG_0640_c.jpg",
-  "IMG_0641_c.jpg", "IMG_0643_c.jpg", "IMG_0644_c.jpg", "IMG_0645_c.jpg",
-  "IMG_0646_c.jpg", "IMG_0647_c.jpg", "IMG_0648_c.jpg", "IMG_6106_c.jpg",
-  "IMG_6215_c.jpg", "IMG_6224_c.jpg"
-].map(img => `/images/Chopta/${img}`);
 
 const whyChooseData = [
     {
         icon: Mountain,
-        title: "High Altitude Thrills",
-        description: "Expertly guided treks through Alpine meadows leading to sacred, majestic peaks."
+        title: "Paradise on Earth",
+        description: "Immerse yourself in breathtaking landscapes straight out of a painting."
     },
     {
         icon: HeartHandshake,
-        title: "Premium Handpicked Stays",
-        description: "Cozy camps and comfortable lodgings ensuring you rest well after a day of exploration."
+        title: "Warm Hospitality",
+        description: "Experience the unique culture and welcoming nature of Kashmiri locals."
     },
     {
         icon: Map,
-        title: "Seamless Planning",
-        description: "From transport to permits, we handle all the logistics so you can focus on the adventure."
+        title: "Seamless Logistics",
+        description: "From Dal Lake to high-altitude passes, we manage all your travel needs."
     },
     {
         icon: Sunrise,
-        title: "Spiritual Connection",
-        description: "Engage with the divine energy of Tungnath and the peaceful serenity of the mountains."
+        title: "Tranquil Vibes",
+        description: "Find peace surrounded by snowy peaks, floating markets, and historic shrines."
     }
 ];
 
-
-
-const UttarakhandPage: React.FC = () => {
+const KashmirPage: React.FC = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => {
@@ -112,9 +78,8 @@ const UttarakhandPage: React.FC = () => {
 
   return (
     <PageTransition>
-      {/* Hero Section Inline */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-[url('/images/destinations/kashmir_bg.png')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-black/50" />
         
         <div className="relative z-10 text-center px-6 mt-16 max-w-5xl">
@@ -126,7 +91,7 @@ const UttarakhandPage: React.FC = () => {
             style={{ filter: "drop-shadow(0px 6px 12px rgba(0, 0, 0, 0.9))" }}
           >
             <span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-orange-50 to-theme-accent-orange-end">
-              Uttarakhand<br />Escapes
+              Kashmir<br />Escapes
             </span>
           </motion.h1>
           <motion.p
@@ -136,7 +101,7 @@ const UttarakhandPage: React.FC = () => {
             className="text-2xl md:text-3xl font-medium tracking-wide max-w-3xl mx-auto text-white"
             style={{ textShadow: "0px 2px 8px rgba(0, 0, 0, 0.9)" }}
           >
-            Journey to the Abode of Gods. Discover majestic mountain peaks, serene rivers, and spiritual bliss.
+            Journey to Paradise on Earth. Discover pristine lakes, lush valleys, and snow-capped peaks.
           </motion.p>
         </div>
       </section>
@@ -150,12 +115,11 @@ const UttarakhandPage: React.FC = () => {
                 transition={{ duration: 0.8, ease: 'easeOut' }}
                 className="text-center max-w-3xl mx-auto"
             >
-                <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-primary-start transition-all duration-500 hover:text-warm-gold-dark hover:drop-shadow-[0_0_15px_rgba(181,98,5,0.3)]">Elevate Your Spirit</h2>
-                <p className="text-lg text-gray-700">Immerse yourself in the tranquility of the Himalayas. Our Chopta-Tungnath package is designed for adventurers seeking sweeping views and spiritual solace.</p>
+                <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-primary-start transition-all duration-500 hover:text-warm-gold-dark hover:drop-shadow-[0_0_15px_rgba(181,98,5,0.3)]">A Heavenly Retreat</h2>
+                <p className="text-lg text-gray-700">From the floating gardens of Dal Lake to the snowy slopes of Gulmarg, our packages are tailored for unforgettable memories.</p>
             </motion.div>
 
             <div className="relative mt-20 max-w-7xl mx-auto">
-                {/* Navigation Arrows */}
                 <button 
                   onClick={scrollLeft}
                   className="absolute left-0 top-1/2 -content absolute -translate-y-1/2 -translate-x-4 md:-translate-x-6 z-20 bg-white/80 hover:bg-white text-primary-start p-3 rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 hover:scale-110 hidden md:flex"
@@ -172,7 +136,6 @@ const UttarakhandPage: React.FC = () => {
                   <ChevronRight className="w-6 h-6" />
                 </button>
 
-                {/* Carousel Container */}
                 <div 
                   ref={carouselRef}
                   className="flex overflow-x-auto gap-6 md:gap-8 pb-12 snap-x snap-mandatory hide-scrollbar px-4 md:px-8"
@@ -219,43 +182,6 @@ const UttarakhandPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Chopta Photo Gallery */}
-      <section className="py-20 md:py-24 bg-white/50 backdrop-blur-sm">
-        <div className="container mx-auto px-6">
-            <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.5 }}
-                transition={{ duration: 0.8, ease: 'easeOut' }}
-                className="text-center max-w-4xl mx-auto mb-16"
-            >
-                <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-primary-start transition-all duration-500 hover:text-warm-gold-dark hover:drop-shadow-[0_0_15px_rgba(181,98,5,0.3)]">Glimpses of Chopta</h2>
-                <p className="text-lg text-gray-700">A curated collection of visual memories from the breathtaking high-altitude meadows and trails of Chopta-Tungnath.</p>
-            </motion.div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
-                {choptaGallery.map((imgUrl, index) => (
-                    <motion.div
-                        key={imgUrl}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true, amount: 0.1 }}
-                        transition={{ duration: 0.5, delay: (index % 10) * 0.05 }}
-                        className="group relative aspect-square overflow-hidden rounded-xl shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer"
-                    >
-                        <img 
-                            src={imgUrl} 
-                            alt={`Chopta scenery ${index + 1}`} 
-                            className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
-                            loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 rounded-xl" />
-                    </motion.div>
-                ))}
-            </div>
-        </div>
-      </section>
-
       <section className="pt-20 md:pt-28 pb-6 md:pb-10 doodle-bg-overlay">
         <div className="container mx-auto px-6">
             <motion.div 
@@ -265,7 +191,7 @@ const UttarakhandPage: React.FC = () => {
                 transition={{ duration: 0.8, ease: 'easeOut' }}
                 className="text-center max-w-3xl mx-auto"
             >
-                <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-text-light transition-all duration-500 hover:text-accent-gold hover:drop-shadow-[0_0_15px_rgba(255,199,0,0.3)]">Why Choose Uttarakhand Escapes?</h2>
+                <h2 className="text-4xl md:text-5xl font-playfair font-bold mb-4 text-text-light transition-all duration-500 hover:text-accent-gold hover:drop-shadow-[0_0_15px_rgba(255,199,0,0.3)]">Why Choose Kashmir Escapes?</h2>
             </motion.div>
 
             <motion.div 
@@ -284,8 +210,6 @@ const UttarakhandPage: React.FC = () => {
 
       <TravellersCounter location="" />
       
-
-
       <section className="pt-8 pb-16 md:pt-12 md:pb-20 doodle-bg-overlay">
         <div className="container mx-auto px-6">
             <motion.div
@@ -301,10 +225,10 @@ const UttarakhandPage: React.FC = () => {
                         to="/contact"
                         className="group w-full sm:w-auto inline-flex items-center justify-center bg-active-nav-gradient text-white font-medium py-3 px-8 rounded-[10px] text-lg transition-all duration-300 ease-in-out cursor-pointer hover:scale-105 hover:shadow-lg hover:shadow-theme-accent-orange-start/40"
                     >
-                        📅 Plan My Trek
+                        📅 Plan My Trip
                     </Link>
                     <a
-                        href="https://wa.me/917976789334?text=Hi%20Bharatescapes%2C%0AI'd%20like%20to%20know%20more%20about%20the%20Chopta%20Tungnath%20package."
+                        href="https://wa.me/917976789334?text=Hi%20Bharatescapes%2C%0AI'd%20like%20to%20know%20more%20about%20the%20Kashmir%20packages."
                         target="_blank"
                         rel="noopener noreferrer"
                         className="group w-full sm:w-auto inline-flex items-center justify-center bg-active-nav-gradient text-white font-medium py-3 px-8 rounded-[10px] text-lg transition-all duration-300 ease-in-out cursor-pointer hover:scale-105 hover:shadow-lg hover:shadow-theme-accent-orange-start/40"
@@ -319,4 +243,4 @@ const UttarakhandPage: React.FC = () => {
   );
 };
 
-export default UttarakhandPage;
+export default KashmirPage;

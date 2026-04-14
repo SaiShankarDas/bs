@@ -11,6 +11,8 @@ import Loader from './components/common/Loader';
 const SplashPage = lazy(() => import('./pages/SplashPage'));
 const HomePage = lazy(() => import('./pages/HomePage'));
 const UttarakhandPage = lazy(() => import('./pages/UttarakhandPage'));
+const HimachalPage = lazy(() => import('./pages/HimachalPage'));
+const KashmirPage = lazy(() => import('./pages/KashmirPage'));
 const ChoptaItineraryPage = lazy(() => import('./pages/ChoptaItineraryPage'));
 const ChoptaRegistrationPage = lazy(() => import('./pages/ChoptaRegistrationPage'));
 const ToursPage = lazy(() => import('./pages/ToursPage'));
@@ -37,6 +39,8 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/udaipur" element={<HomePage />} />
               <Route path="/uttarakhand" element={<UttarakhandPage />} />
+              <Route path="/himachal" element={<HimachalPage />} />
+              <Route path="/kashmir" element={<KashmirPage />} />
               <Route path="/uttarakhand/chopta-tungnath" element={<ChoptaItineraryPage />} />
               <Route path="/uttarakhand/register" element={<ChoptaRegistrationPage />} />
               <Route path="/tours" element={<ToursPage />} />

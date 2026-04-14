@@ -19,10 +19,16 @@ const Header: React.FC = () => {
 
   const location = useLocation();
   const isUttarakhand = location.pathname.startsWith('/uttarakhand');
+  const isHimachal = location.pathname.startsWith('/himachal');
+  const isKashmir = location.pathname.startsWith('/kashmir');
   
-  const currentNavLinks = isUttarakhand 
-    ? [{ name: 'Register', to: '/uttarakhand/register' }, ...navLinks.filter(link => link.name === 'Book Now')]
-    : navLinks;
+  let currentNavLinks = navLinks;
+  
+  if (isUttarakhand) {
+    currentNavLinks = [{ name: 'Register', to: '/uttarakhand/register' }, ...navLinks.filter(link => link.name === 'Book Now')];
+  } else if (isHimachal || isKashmir) {
+    currentNavLinks = navLinks.filter(link => link.name === 'Book Now');
+  }
 
   useEffect(() => {
     const handleScroll = () => {
