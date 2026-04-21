@@ -272,7 +272,8 @@ const ShangarhItineraryPage: React.FC = () => {
                         className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-accent-gold focus:border-transparent transition-all outline-none"
                       >
                         <option value="Delhi">Delhi</option>
-                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Jaipur">Jaipur</option>
+                        <option value="Udaipur">Udaipur</option>
                       </select>
                     </div>
                   </div>
