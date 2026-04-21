@@ -12,7 +12,19 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwfOxsoezCPzAACWCkGi
 
 // Add new destinations here as you expand
 const DESTINATIONS = [
-  'Chopta – Tungnath Trek',
+  'Chopta-Tungnath Trek',
+  'Shangarh',
+  'Bir Barot',
+  'Kedarnath',
+  'Munsiyari Khaliya Top',
+  'Chakrata',
+  'Manali Sissu Rohtang Pass',
+  'Mcleodganj Dharamkot Triund',
+  'Jibhi Shoja Tirthan',
+  'Kasol Kheerganga Trek',
+  'Harshil Valley',
+  'Rishikesh',
+  'Char Dham',
 ];
 
 const indemnityTerms = [
@@ -55,7 +67,7 @@ const indemnityTerms = [
 
 type SubmissionStatus = 'idle' | 'submitting' | 'success' | 'error';
 
-const ChoptaRegistrationPage: React.FC = () => {
+const TrekRegistrationPage: React.FC = () => {
   // Destination
   const [destination, setDestination] = useState('');
 
@@ -670,4 +682,4 @@ const ChoptaRegistrationPage: React.FC = () => {
   );
 };
 
-export default ChoptaRegistrationPage;
+export default TrekRegistrationPage;

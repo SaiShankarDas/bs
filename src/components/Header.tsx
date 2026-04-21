@@ -26,7 +26,9 @@ const Header: React.FC = () => {
   
   if (isUttarakhand) {
     currentNavLinks = [{ name: 'Register', to: '/uttarakhand/register' }, ...navLinks.filter(link => link.name === 'Book Now')];
-  } else if (isHimachal || isKashmir) {
+  } else if (isHimachal) {
+    currentNavLinks = [{ name: 'Register', to: '/himachal/register' }, ...navLinks.filter(link => link.name === 'Book Now')];
+  } else if (isKashmir) {
     currentNavLinks = navLinks.filter(link => link.name === 'Book Now');
   }
 

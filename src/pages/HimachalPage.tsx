@@ -9,17 +9,17 @@ import TravellersCounter from '../components/home/TravellersCounter';
 
 const carouselData = [
     {
+        title: "Shangarh",
+        description: "A hidden gem in the Sainj Valley, known for its pristine meadows and ancient temples.",
+        link: "/himachal/shangarh",
+        image: "/images/destinations/shangarh.png",
+        comingSoon: false
+    },
+    {
         title: "Bir Barot",
         description: "Experience the thrill of paragliding and the serenity of the Barot Valley.",
         link: "/contact",
         image: "/images/destinations/bir_barot.png",
-        comingSoon: true
-    },
-    {
-        title: "Shangarh",
-        description: "A hidden gem in the Sainj Valley, known for its pristine meadows and ancient temples.",
-        link: "/contact",
-        image: "/images/destinations/shangarh.png",
         comingSoon: true
     },
     {

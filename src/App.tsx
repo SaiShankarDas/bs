@@ -14,7 +14,8 @@ const UttarakhandPage = lazy(() => import('./pages/UttarakhandPage'));
 const HimachalPage = lazy(() => import('./pages/HimachalPage'));
 const KashmirPage = lazy(() => import('./pages/KashmirPage'));
 const ChoptaItineraryPage = lazy(() => import('./pages/ChoptaItineraryPage'));
-const ChoptaRegistrationPage = lazy(() => import('./pages/ChoptaRegistrationPage'));
+const ShangarhItineraryPage = lazy(() => import('./pages/ShangarhItineraryPage'));
+const TrekRegistrationPage = lazy(() => import('./pages/TrekRegistrationPage'));
 const ToursPage = lazy(() => import('./pages/ToursPage'));
 const StaysPage = lazy(() => import('./pages/StaysPage'));
 const EventsPage = lazy(() => import('./pages/EventsPage'));
@@ -40,9 +41,11 @@ function App() {
               <Route path="/udaipur" element={<HomePage />} />
               <Route path="/uttarakhand" element={<UttarakhandPage />} />
               <Route path="/himachal" element={<HimachalPage />} />
+              <Route path="/himachal/register" element={<TrekRegistrationPage />} />
+              <Route path="/himachal/shangarh" element={<ShangarhItineraryPage />} />
               <Route path="/kashmir" element={<KashmirPage />} />
               <Route path="/uttarakhand/chopta-tungnath" element={<ChoptaItineraryPage />} />
-              <Route path="/uttarakhand/register" element={<ChoptaRegistrationPage />} />
+              <Route path="/uttarakhand/register" element={<TrekRegistrationPage />} />
               <Route path="/tours" element={<ToursPage />} />
               <Route path="/stays" element={<StaysPage />} />
               <Route path="/events" element={<EventsPage />} />

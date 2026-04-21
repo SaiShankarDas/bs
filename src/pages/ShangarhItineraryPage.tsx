@@ -7,91 +7,87 @@ import { Link } from 'react-router-dom';
 const itineraryDays = [
   {
     day: "Day 0",
-    title: "The Journey Begins",
+    title: "Departure from Delhi",
     items: [
-      "Evening departure from Delhi.",
-      "Meet your trip captain and fellow travelers — your travel tribe for the next few days.",
-      "Quick briefing about the journey, itinerary & basic guidelines.",
-      "Kickstart the trip with fun ice-breaking sessions, music & travel games.",
-      "Enjoy the overnight road journey as the city lights slowly fade into mountain roads.",
-      "Comfortable travel with scenic night drive towards Uttarakhand."
+      "Depart from Delhi at 10:00 PM for an overnight journey to Shangarh.",
+      "Meet your fellow travelers and the Bharatescapes host.",
+      "Briefing about the journey and ice-breaking sessions.",
+      "Comfortable overnight travel in a Tempo Traveller."
     ],
-    quote: "The journey begins even before you reach the mountains — it starts with the people you travel with."
+    quote: "The best journeys are the ones that lead us to hidden gems."
   },
   {
     day: "Day 1",
-    title: "A Day of Spiritual & Scenic Beauty",
+    title: "Village Exploration & Meadows",
     items: [
-      "Early morning arrival in Rishikesh.",
-      "Sunrise breakfast at RISHIKESH.",
-      "Thrilling white water River Rafting in RISHIKESH.",
-      "Witness confluence of Alaknanda & Bhagirathi rivers. Lunch at Devprayag.",
-      "Continue scenic drive through mountains.",
-      "Reach Chopta by evening.",
-      "Dinner & overnight stay at Chopta."
+      "Check-in to hostel/hotel and freshen up.",
+      "All set to explore the beautiful Shangarh village.",
+      "Walk through the iconic Shangarh meadows.",
+      "Try local delicacies like Siddu.",
+      "Experience the golden hour at the sunset point.",
+      "Bonfire, dancing in the meadows, and stargazing nights."
     ],
-    quote: "# From rivers to ridges - a perfect Himalayan welcome."
+    quote: "# Meadows that feel like a dream, nights that stay forever."
   },
   {
     day: "Day 2",
-    title: "TheTrek Day(Adventure Peak)",
+    title: "Forest Trail & Trek to Ganjau",
     items: [
-      "Early morning trek begins.",
-      "Trek to Tungnath Temple (highest Shiva temple)",
-      "Continue trek to Chandrashila Summit.",
-      "360° Himalayan views(Nanda Devi, Trishul,etc).",
-      "Descend back to base.",
-      "Fun evening in Chopta[meadows,jamming, dance, games & much more]."
+      "Light breakfast and pack your bags for adventure.",
+      "Forest trail trek to GANJAU.",
+      "Enjoy cooking by the stream in the lap of nature.",
+      "Return to the stay by evening.",
+      "Music, karaoke, and a warm mountain night."
     ],
-    quote: "# Walk above the clouds, stand at the summit."
+    quote: "# Into the forest I go, to lose my mind and find my soul."
   },
   {
     day: "Day 3",
-    title: "Adventure & Thrill in Rishikesh",
+    title: "Raila Waterfall & Twin Towers",
     items: [
-      "Breakfast & checkout from Chopta.",
-      "Scenic drive back to Rishikesh.",
-      "Divine Ganga Arti experience.",
-      "Pit stop for dinner.",
-      "Departure to Delhi with memories."
+      "Breakfast and leave for Raila waterfall.",
+      "Twin Tower exploration and a short hike to Bhatkanda meadows.",
+      "Capture one last sunset full of beautiful memories.",
+      "Start the return journey towards Delhi."
     ],
-    quote: "# End the trip with calm, not chaos, with family not the strangers."
+    quote: "# chasing waterfalls and sunsets, one peak at a time."
+  },
+  {
+    day: "Day 4",
+    title: "Back to Delhi",
+    items: [
+      "Reach Delhi by early morning, around 5:00 AM.",
+      "End of the journey with hearts full of memories and stories to tell."
+    ],
+    quote: "Every end is a new beginning. Until next time, Himalayas!"
   }
 ];
 
 const inclusions = [
-  "Accommodation (as per the itinerary).",
-  "Meals - 3 Breakfast and 3 Dinner.",
-  "Transportation (Tempo Traveller)",
-  "Support: 1 Mountaineering & First aid qualified professional expedition Leader.",
-  "First aid & Medical kit.",
-  "Cloakroom service at base camp.",
-  "Mules/porters to carry the central luggage (NOT THE PERSONAL LUGGAGE).",
-  "All necessary permits and entry fees, up to the amount charged for Indian.",
-  "Services from Delhi to Delhi."
+  "Transportation (Tempo Traveller).",
+  "Stay - 2 nights.",
+  "Meals: 3 Breakfast & 3 Dinner.",
+  "Treks & other activities.",
+  "Experienced host by Bharatescapes."
 ];
 
 const exclusions = [
   "Insurance.",
-  "Lunch.",
   "Any kind of personal expenses.",
-  "Mule or porter to carry personal luggage.",
-  "Emergency evacuation, hospitalization charge or etc.",
-  "Rental Gear.",
-  "Anything not specifically mentioned under the head.",
-  "Anything not mentioned in inclusions."
+  "Meals not mentioned in the inclusions.",
+  "Anything not specifically mentioned under inclusions."
 ];
 
-const ChoptaItineraryPage: React.FC = () => {
+const ShangarhItineraryPage: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     people: '',
-    pickup: ''
+    pickup: 'Delhi'
   });
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `Hi Bharatescapes,\n\nI'd like to book the Chopta-Tungnath package for 1st-3rd May.\n\nMy Details:\nName: ${formData.name}\nNo. of people: ${formData.people}\nPickup Location: ${formData.pickup}`;
+    const message = `Hi Bharatescapes,\n\nI'd like to book the Shangarh package for 1st-3rd May.\n\nMy Details:\nName: ${formData.name}\nNo. of people: ${formData.people}\nPickup Location: ${formData.pickup}`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/917976789334?text=${encodedMessage}`, '_blank');
   };
@@ -100,7 +96,7 @@ const ChoptaItineraryPage: React.FC = () => {
     <PageTransition>
       {/* Hero Section */}
       <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden pt-20">
-        <div className="absolute inset-0 bg-[url('/destinations/chopta_tungnath_1774209147259.png')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-[url('/images/destinations/shangarh.png')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-black/50" />
         
         <div className="relative z-10 text-center px-6 max-w-5xl">
@@ -112,7 +108,7 @@ const ChoptaItineraryPage: React.FC = () => {
           >
             <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" /> 3D 2N</span>
             <span className="w-1.5 h-1.5 rounded-full bg-accent-gold" />
-            <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> Uttarakhand</span>
+            <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> Himachal Pradesh</span>
           </motion.div>
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
@@ -120,7 +116,7 @@ const ChoptaItineraryPage: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-5xl md:text-7xl lg:text-8xl font-playfair font-black mb-6 tracking-tight text-white drop-shadow-2xl"
           >
-            Chopta-Tungnath Trek
+            Shangarh Escape
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -128,7 +124,7 @@ const ChoptaItineraryPage: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl md:text-2xl font-medium tracking-wide max-w-3xl mx-auto text-gray-200"
           >
-            Experience the magic of the Himalayas with a trek to the highest Shiva temple.
+            Discover the pristine meadows and hidden waterfalls of Sainj Valley.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -152,7 +148,6 @@ const ChoptaItineraryPage: React.FC = () => {
             <div className="mb-16">
               <h2 className="text-4xl font-playfair font-bold text-primary-start mb-10 text-center">Detailed Itinerary</h2>
               <div className="space-y-12 max-w-3xl mx-auto relative pl-6 md:pl-10">
-                {/* Vertical Line */}
                 <div className="absolute left-6 md:left-[39px] top-6 bottom-6 w-0.5 bg-theme-accent-orange-start/30" />
                 
                 {itineraryDays.map((day, idx) => (
@@ -164,7 +159,6 @@ const ChoptaItineraryPage: React.FC = () => {
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
                     className="relative"
                   >
-                    {/* Timeline dot */}
                     <span className="absolute -left-[30px] md:-left-[44px] top-1.5 w-5 h-5 rounded-full bg-theme-accent-orange-start ring-4 ring-white z-10 shadow-sm" />
                     
                     <div className="mb-4">
@@ -277,11 +271,8 @@ const ChoptaItineraryPage: React.FC = () => {
                         onChange={(e) => setFormData({...formData, pickup: e.target.value})}
                         className="w-full px-4 py-3 rounded-xl border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-accent-gold focus:border-transparent transition-all outline-none"
                       >
-                        <option value="" disabled>Select Location</option>
                         <option value="Delhi">Delhi</option>
-                        <option value="Rishikesh">Rishikesh</option>
-                        <option value="Jaipur">Jaipur</option>
-                        <option value="Udaipur">Udaipur</option>
+                        <option value="Chandigarh">Chandigarh</option>
                       </select>
                     </div>
                   </div>
@@ -291,15 +282,15 @@ const ChoptaItineraryPage: React.FC = () => {
                     className="w-full py-4 mt-4 rounded-xl bg-active-nav-gradient text-white font-bold hover:shadow-lg transition-all group flex items-center justify-center gap-2 text-lg"
                   >
                     <MessageCircle className="w-5 h-5" />
-                    Book
+                    Book Experience
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </form>
               </div>
               
               <div className="mt-8 text-center">
-                <Link to="/uttarakhand" className="inline-flex items-center text-gray-500 hover:text-primary-start font-medium transition-colors">
-                  <ArrowRight className="w-4 h-4 mr-2 rotate-180" /> Back to Uttarakhand Escapes
+                <Link to="/himachal" className="inline-flex items-center text-gray-500 hover:text-primary-start font-medium transition-colors">
+                  <ArrowRight className="w-4 h-4 mr-2 rotate-180" /> Back to Himachal Escapes
                 </Link>
               </div>
             </div>
@@ -311,4 +302,4 @@ const ChoptaItineraryPage: React.FC = () => {
   );
 };
 
-export default ChoptaItineraryPage;
+export default ShangarhItineraryPage;
