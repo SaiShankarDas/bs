@@ -22,6 +22,8 @@ const EventsPage = lazy(() => import('./pages/EventsPage'));
 const GalleryPage = lazy(() => import('./pages/GalleryPage'));
 const TourRegistrationPage = lazy(() => import('./pages/TourRegistrationPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
+const BirBarotItineraryPage = lazy(() => import('./pages/BirBarotItineraryPage'));
+
 
 function App() {
   const location = useLocation();
@@ -43,6 +45,8 @@ function App() {
               <Route path="/himachal" element={<HimachalPage />} />
               <Route path="/himachal/register" element={<TrekRegistrationPage />} />
               <Route path="/himachal/shangarh" element={<ShangarhItineraryPage />} />
+              <Route path="/himachal/bir-barot" element={<BirBarotItineraryPage />} />
+
               <Route path="/kashmir" element={<KashmirPage />} />
               <Route path="/uttarakhand/chopta-tungnath" element={<ChoptaItineraryPage />} />
               <Route path="/uttarakhand/register" element={<TrekRegistrationPage />} />

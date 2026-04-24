@@ -18,9 +18,9 @@ const carouselData = [
     {
         title: "Bir Barot",
         description: "Experience the thrill of paragliding and the serenity of the Barot Valley.",
-        link: "/contact",
+        link: "/himachal/bir-barot",
         image: "/images/destinations/bir_barot.png",
-        comingSoon: true
+        comingSoon: false
     },
     {
         title: "Manali Sissu Rohtang Pass",
