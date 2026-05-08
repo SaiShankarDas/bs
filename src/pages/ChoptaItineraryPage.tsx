@@ -57,7 +57,7 @@ const itineraryDays = [
 
 const inclusions = [
   "Accommodation (as per the itinerary).",
-  "Meals - 3 Breakfast and 3 Dinner.",
+  "Meals - 2 Breakfast and 2 Dinner.",
   "Transportation (Tempo Traveller)",
   "Support: 1 Mountaineering & First aid qualified professional expedition Leader.",
   "First aid & Medical kit.",
@@ -87,7 +87,7 @@ const ChoptaItineraryPage: React.FC = () => {
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `Hi Bharatescapes,\n\nI'd like to book the Chopta-Tungnath package for 1st-3rd May.\n\nMy Details:\nName: ${formData.name}\nNo. of people: ${formData.people}\nPickup Location: ${formData.pickup}`;
+    const message = `Hi Bharatescapes,\n\nI'd like to book the Chopta-Tungnath package for 15-17 May.\n\nMy Details:\nName: ${formData.name}\nNo. of people: ${formData.people}\nPickup Location: ${formData.pickup}`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/917976789334?text=${encodedMessage}`, '_blank');
   };
@@ -232,7 +232,7 @@ const ChoptaItineraryPage: React.FC = () => {
               <div className="max-w-2xl mx-auto bg-warm-white/50 p-8 rounded-3xl border border-theme-accent-orange-start/20 shadow-lg">
                 <div className="mb-8 text-center">
                   <span className="inline-block px-4 py-1.5 bg-accent-gold/20 text-accent-gold font-bold tracking-wider uppercase rounded-full mb-4">Special Batch</span>
-                  <h3 className="text-3xl font-playfair font-bold mb-3 text-primary-start">1st - 3rd May</h3>
+                  <h3 className="text-3xl font-playfair font-bold mb-3 text-primary-start">15 - 17 May</h3>
                   <p className="text-gray-600">Fill out the details below to reserve your spot via WhatsApp.</p>
                 </div>
 
