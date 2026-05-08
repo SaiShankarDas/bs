@@ -7,55 +7,51 @@ import { Link } from 'react-router-dom';
 const itineraryDays = [
   {
     day: "Day 0",
-    title: "The Journey Begins",
+    title: "Departure from Delhi",
     items: [
-      "Evening departure from Delhi.",
-      "Meet your trip captain and fellow travelers — your travel tribe for the next few days.",
-      "Quick briefing about the journey, itinerary & basic guidelines.",
-      "Kickstart the trip with fun ice-breaking sessions, music & travel games.",
-      "Enjoy the overnight road journey as the city lights slowly fade into mountain roads.",
-      "Comfortable travel with scenic night drive towards Uttarakhand."
+      "Departure from Delhi.",
+      "Overnight journey to Rishikesh.",
+      "Meet your trip captain and fellow travelers.",
+      "Kickstart the trip with fun ice-breaking sessions & travel games."
     ],
     quote: "The journey begins even before you reach the mountains — it starts with the people you travel with."
   },
   {
     day: "Day 1",
-    title: "A Day of Spiritual & Scenic Beauty",
+    title: "Rishikesh to Chopta",
     items: [
-      "Early morning arrival in Rishikesh.",
-      "Sunrise breakfast at RISHIKESH.",
-      "Thrilling white water River Rafting in RISHIKESH.",
-      "Witness confluence of Alaknanda & Bhagirathi rivers. Lunch at Devprayag.",
-      "Continue scenic drive through mountains.",
-      "Reach Chopta by evening.",
-      "Dinner & overnight stay at Chopta."
+      "Arrival in Rishikesh.",
+      "River rafting in Rishikesh (optional).",
+      "Lunch nearby Devprayag.",
+      "Visit Devprayag Sangam (sacred confluence of Alaknanda & Bhagirathi rivers forming the Ganga).",
+      "Scenic drive to Chopta.",
+      "Dinner & cozy stay at Chopta."
     ],
-    quote: "# From rivers to ridges - a perfect Himalayan welcome."
+    quote: "From rivers to ridges - a perfect Himalayan welcome."
   },
   {
     day: "Day 2",
-    title: "TheTrek Day(Adventure Peak)",
+    title: "Tungnath & Chandrashila Peak",
     items: [
-      "Early morning trek begins.",
-      "Trek to Tungnath Temple (highest Shiva temple)",
-      "Continue trek to Chandrashila Summit.",
-      "360° Himalayan views(Nanda Devi, Trishul,etc).",
+      "Trek to Tungnath Temple (the highest Shiva temple in the world).",
+      "Summit Chandrashila Peak for 360° Himalayan views.",
       "Descend back to base.",
-      "Fun evening in Chopta[meadows,jamming, dance, games & much more]."
+      "Community activities including jamming, music night, interaction session & community dinner."
     ],
-    quote: "# Walk above the clouds, stand at the summit."
+    quote: "Walk above the clouds, stand at the summit."
   },
   {
     day: "Day 3",
-    title: "Adventure & Thrill in Rishikesh",
+    title: "Forest Walk & Return",
     items: [
+      "Relaxing early morning forest walk through beautiful meadows.",
       "Breakfast & checkout from Chopta.",
-      "Scenic drive back to Rishikesh.",
-      "Divine Ganga Arti experience.",
-      "Pit stop for dinner.",
-      "Departure to Delhi with memories."
+      "Return journey to Rishikesh.",
+      "Visit Dhari Devi Temple.",
+      "Departure to Delhi.",
+      "Dinner & trip ends with memories."
     ],
-    quote: "# End the trip with calm, not chaos, with family not the strangers."
+    quote: "End the trip with memories that last a lifetime."
   }
 ];
 
