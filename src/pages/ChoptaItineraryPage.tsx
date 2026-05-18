@@ -7,9 +7,12 @@ import { Link } from 'react-router-dom';
 const itineraryDays = [
   {
     day: "Day 0",
-    title: "Departure from Delhi",
+    title: "Departure & Journey Begins",
     items: [
-      "Departure from Delhi.",
+      "Udaipur Meeting Time: 05:30 AM",
+      "Jaipur Meeting Time: 01:45 PM",
+      "Delhi Meeting Time: 09:45 PM",
+      "Boarding starts 15 minutes after the meeting time (Please be on time).",
       "Overnight journey to Rishikesh.",
       "Meet your trip captain and fellow travelers.",
       "Kickstart the trip with fun ice-breaking sessions & travel games."
@@ -21,10 +24,11 @@ const itineraryDays = [
     title: "Rishikesh to Chopta",
     items: [
       "Arrival in Rishikesh.",
-      "River rafting in Rishikesh (optional).",
+      "River rafting in Rishikesh (06:00 AM - 07:00 AM) (optional).",
+      "Rishikesh Meeting Time: 08:00 AM.",
       "Lunch nearby Devprayag.",
       "Visit Devprayag Sangam (sacred confluence of Alaknanda & Bhagirathi rivers forming the Ganga).",
-      "Scenic drive to Chopta.",
+      "Scenic drive to Chopta (reached by the evening).",
       "Dinner & cozy stay at Chopta."
     ],
     quote: "From rivers to ridges - a perfect Himalayan welcome."
@@ -33,7 +37,7 @@ const itineraryDays = [
     day: "Day 2",
     title: "Tungnath & Chandrashila Peak",
     items: [
-      "Trek to Tungnath Temple (the highest Shiva temple in the world).",
+      "Trek starts early in the morning to Tungnath Temple (the highest Shiva temple in the world).",
       "Summit Chandrashila Peak for 360° Himalayan views.",
       "Descend back to base.",
       "Community activities including jamming, music night, interaction session & community dinner."
@@ -45,11 +49,12 @@ const itineraryDays = [
     title: "Forest Walk & Return",
     items: [
       "Relaxing early morning forest walk through beautiful meadows.",
-      "Breakfast & checkout from Chopta.",
+      "Breakfast & property checkout from Chopta at 10:00 AM.",
       "Return journey to Rishikesh.",
       "Visit Dhari Devi Temple.",
       "Departure to Delhi.",
-      "Dinner & trip ends with memories."
+      "Dinner & overnight journey back.",
+      "Reach Delhi early morning before 07:00 AM (Next Day)."
     ],
     quote: "End the trip with memories that last a lifetime."
   }
@@ -87,7 +92,7 @@ const ChoptaItineraryPage: React.FC = () => {
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `Hi Bharatescapes,\n\nI'd like to book the Chopta-Tungnath package for 15-17 May.\n\nMy Details:\nName: ${formData.name}\nNo. of people: ${formData.people}\nPickup Location: ${formData.pickup}`;
+    const message = `Hi Bharatescapes,\n\nI'd like to book the Chopta-Tungnath package for 22-24 May.\n\nMy Details:\nName: ${formData.name}\nNo. of people: ${formData.people}\nPickup Location: ${formData.pickup}`;
     const encodedMessage = encodeURIComponent(message);
     window.open(`https://wa.me/917976789334?text=${encodedMessage}`, '_blank');
   };
@@ -183,6 +188,12 @@ const ChoptaItineraryPage: React.FC = () => {
                   </motion.div>
                 ))}
               </div>
+              
+              {/* Timing Note */}
+              <div className="mt-12 max-w-3xl mx-auto bg-warm-white/60 backdrop-blur-sm p-4 rounded-xl border-l-4 border-theme-accent-orange-start text-gray-600 text-sm flex items-center gap-2.5 shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-theme-accent-orange-start flex-shrink-0 animate-pulse" />
+                <p className="font-medium">Note: These are approximate timings.</p>
+              </div>
             </div>
 
             {/* Inclusions & Exclusions */}
@@ -232,7 +243,7 @@ const ChoptaItineraryPage: React.FC = () => {
               <div className="max-w-2xl mx-auto bg-warm-white/50 p-8 rounded-3xl border border-theme-accent-orange-start/20 shadow-lg">
                 <div className="mb-8 text-center">
                   <span className="inline-block px-4 py-1.5 bg-accent-gold/20 text-accent-gold font-bold tracking-wider uppercase rounded-full mb-4">Special Batch</span>
-                  <h3 className="text-3xl font-playfair font-bold mb-3 text-primary-start">15 - 17 May</h3>
+                  <h3 className="text-3xl font-playfair font-bold mb-3 text-primary-start">22 - 24 May</h3>
                   <p className="text-gray-600">Fill out the details below to reserve your spot via WhatsApp.</p>
                 </div>
 
