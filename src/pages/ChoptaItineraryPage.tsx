@@ -63,7 +63,7 @@ const itineraryDays = [
 const inclusions = [
   "Accommodation (as per the itinerary).",
   "Meals - 2 Breakfast and 2 Dinner.",
-  "Transportation (Tempo Traveller)",
+  "Transportation (Tempo Traveller/car)",
   "Support: 1 Mountaineering & First aid qualified professional expedition Leader.",
   "First aid & Medical kit.",
   "Cloakroom service at base camp.",
@@ -188,11 +188,16 @@ const ChoptaItineraryPage: React.FC = () => {
                   </motion.div>
                 ))}
               </div>
-              
-              {/* Timing Note */}
-              <div className="mt-12 max-w-3xl mx-auto bg-warm-white/60 backdrop-blur-sm p-4 rounded-xl border-l-4 border-theme-accent-orange-start text-gray-600 text-sm flex items-center gap-2.5 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-theme-accent-orange-start flex-shrink-0 animate-pulse" />
-                <p className="font-medium">Note: These are approximate timings.</p>
+              {/* Important Notes */}
+              <div className="mt-12 max-w-3xl mx-auto space-y-3">
+                <div className="bg-warm-white/60 backdrop-blur-sm p-4 rounded-xl border-l-4 border-theme-accent-orange-start text-gray-600 text-sm flex items-center gap-2.5 shadow-sm">
+                  <span className="w-2 h-2 rounded-full bg-theme-accent-orange-start flex-shrink-0 animate-pulse" />
+                  <p className="font-medium">Note: These are approximate timings.</p>
+                </div>
+                <div className="bg-warm-white/60 backdrop-blur-sm p-4 rounded-xl border-l-4 border-theme-accent-orange-start text-gray-600 text-sm flex items-center gap-2.5 shadow-sm">
+                  <span className="w-2 h-2 rounded-full bg-theme-accent-orange-start flex-shrink-0" />
+                  <p className="font-medium">Note: If total batch size is below 12, the mode of transport would be a 7 seater vehicle rather than a Tempo Traveller.</p>
+                </div>
               </div>
             </div>
 
