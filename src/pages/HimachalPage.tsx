@@ -12,42 +12,42 @@ const carouselData = [
         title: "Shangarh",
         description: "A hidden gem in the Sainj Valley, known for its pristine meadows and ancient temples.",
         link: "/himachal/shangarh",
-        image: "/images/destinations/shangarh.png",
+        image: "/images/destinations/shangarh.webp",
         comingSoon: false
     },
     {
         title: "Bir Barot",
         description: "Experience the thrill of paragliding and the serenity of the Barot Valley.",
         link: "/himachal/bir-barot",
-        image: "/images/destinations/bir_barot.png",
+        image: "/images/destinations/bir_barot.webp",
         comingSoon: false
     },
     {
         title: "Manali Sissu Rohtang Pass",
         description: "Epic road trips through snow-capped peaks, vibrant valleys, and the Atal Tunnel.",
         link: "/contact",
-        image: "/images/destinations/manali.png",
+        image: "/images/destinations/manali.webp",
         comingSoon: true
     },
     {
         title: "Mcleodganj Dharamkot Triund",
         description: "Trek to Triund and explore the spiritual vibe of Dharamshala and Mcleodganj.",
         link: "/contact",
-        image: "/images/destinations/mcleodganj.png",
+        image: "/images/destinations/mcleodganj.webp",
         comingSoon: true
     },
     {
         title: "Jibhi Shoja Tirthan",
         description: "Unwind by the Tirthan river and stay in cozy wooden cottages amidst pine forests.",
         link: "/contact",
-        image: "/images/destinations/jibhi.png",
+        image: "/images/destinations/jibhi.webp",
         comingSoon: true
     },
     {
         title: "Kasol Kheerganga Trek",
         description: "A mystical journey featuring hot water springs and the starlit skies of Parvati Valley.",
         link: "/contact",
-        image: "/images/destinations/kasol.png",
+        image: "/images/destinations/kasol.webp",
         comingSoon: true
     }
 ];
@@ -93,7 +93,7 @@ const HimachalPage: React.FC = () => {
   return (
     <PageTransition>
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/images/destinations/himachal_bg.png')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-[url('/images/destinations/himachal_bg.webp')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-black/50" />
         
         <div className="relative z-10 text-center px-6 mt-16 max-w-5xl">

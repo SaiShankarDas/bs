@@ -88,7 +88,7 @@ const BirBarotItineraryPage: React.FC = () => {
     <PageTransition>
       {/* Hero Section */}
       <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden pt-20">
-        <div className="absolute inset-0 bg-[url('/images/destinations/bir_barot.png')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-[url('/images/destinations/bir_barot.webp')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-black/50" />
         
         <div className="relative z-10 text-center px-6 max-w-5xl">

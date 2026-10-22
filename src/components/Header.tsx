@@ -53,7 +53,7 @@ const Header: React.FC = () => {
     >
       <div className="w-full flex justify-between items-center px-6 md:px-10 py-2">
         <Link to="/" className="flex items-center cursor-pointer">
-          <img src="/images/Logo.png" alt="Bharatescapes Logo" className="h-14 w-auto" />
+          <img src="/images/Logo.webp" alt="Bharatescapes Logo" className="h-14 w-auto" width="171" height="56" />
         </Link>
         <div>
           <nav className="hidden md:flex items-center space-x-1">

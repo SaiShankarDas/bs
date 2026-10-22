@@ -17,21 +17,21 @@ const summaryData = [
         title: "Curated Tours",
         description: "From sunrise panoramas to heritage walks, our tours are crafted to immerse you in Udaipur's magic.",
         link: "/tours",
-        image: "/images/Home/dream/tours.jpg"
+        image: "/images/Home/dream/tours.webp"
     },
     {
         icon: Handshake,
         title: "Trusted Partners",
         description: "We collaborate with the best to bring you authentic stays and experiences rooted in local culture.",
         link: "/stays",
-        image: "/images/Home/dream/Stay.jpg"
+        image: "/images/Home/dream/Stay.webp"
     },
     {
         icon: PartyPopper,
         title: "Exciting Events",
         description: "Experience Udaipur's nightlife with live music, comedy, gaming, and unforgettable vibes.",
         link: "/events",
-        image: "/images/Home/dream/Events.jpg"
+        image: "/images/Home/dream/Events.webp"
     }
 ];
 

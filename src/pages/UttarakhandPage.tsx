@@ -25,21 +25,21 @@ const carouselData = [
         title: "Chakrata",
         description: "A secluded hill station known for its pristine beauty, lush forests, and the stunning Tiger Falls.",
         link: "/contact",
-        image: "/images/destinations/chakrata.png",
+        image: "/images/destinations/chakrata.webp",
         comingSoon: true
     },
     {
         title: "Kedarnath",
         description: "One of the most sacred pilgrimage centers in Northern India, located amidst the majestic Himalayas.",
         link: "/contact",
-        image: "/images/destinations/kedarnath.png",
+        image: "/images/destinations/kedarnath.webp",
         comingSoon: true
     },
     {
         title: "Harshil Valley",
         description: "An unspoiled and hidden jewel offering cascading waterfalls, apple orchards, and pine forests.",
         link: "/contact",
-        image: "/images/destinations/harshil.png",
+        image: "/images/destinations/harshil.webp",
         comingSoon: true
     },
     {

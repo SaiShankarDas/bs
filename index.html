@@ -63,7 +63,15 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+    </noscript>
+
+    <!-- Preload LCP image for splash page -->
+    <link rel="preload" as="image" href="/images/destinations/udaipur_bg.webp" fetchpriority="high" type="image/webp" />
 
     <!-- Schema Markup -->
     <script type="application/ld+json">
